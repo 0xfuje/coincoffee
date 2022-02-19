@@ -1,7 +1,21 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import { useGetListQuery } from '../features/api/apiSlice'
 
 const Home: NextPage = () => {
+    const {
+        data: coinList,
+        isFetching,
+        isSuccess
+    } = useGetListQuery(
+        {
+            currency: 'usd',
+            order: 'market_cap_desc',
+            pageNum: 1,
+            priceChange: '1y'
+        }
+    );
+    console.log(coinList);
     return (
         <div className="Home">
         <Head>
