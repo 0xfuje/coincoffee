@@ -4,7 +4,7 @@ import pageSettingsReducer from "../features/page/pageSettingsSlice";
 
 const store = configureStore({
     reducer: {
-        page: pageSettingsReducer,
+        pageSettings: pageSettingsReducer,
         [apiSlice.reducerPath]: apiSlice.reducer,
         
     },
