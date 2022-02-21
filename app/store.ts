@@ -1,9 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { apiSlice } from "../features/api/apiSlice";
+import apiSlice from "../features/api/apiSlice";
+import pageSettingsReducer from "../features/page/pageSettingsSlice";
 
 const store = configureStore({
     reducer: {
-        [apiSlice.reducerPath]: apiSlice.reducer
+        page: pageSettingsReducer,
+        [apiSlice.reducerPath]: apiSlice.reducer,
+        
     },
     middleware: (getDefaultMiddleware) => [...getDefaultMiddleware(), apiSlice.middleware]
     

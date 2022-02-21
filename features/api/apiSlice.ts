@@ -3,13 +3,12 @@ import {
     ListApiInput,
     ListApiResult,
     CoinApiResult,
-    CoinApiInput,
     TickerApiResult,
     ChartApiResult,
     ChartApiInput
  } from '../../types';
 
-export const apiSlice = createApi({
+const apiSlice = createApi({
     reducerPath: 'api',
     baseQuery: fetchBaseQuery({ baseUrl: 'https://api.coingecko.com/api/v3'}),
     endpoints: (builder) => ({
@@ -35,6 +34,7 @@ export const apiSlice = createApi({
     })
 });
 
+export default apiSlice;
 
 export const {
     useGetListQuery,
