@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import apiSlice from "../features/api/apiSlice";
-import pageSettingsReducer from "../features/page/pageSettingsSlice";
+import apiSlice from "../slices/api/apiSlice";
+import pageSettingsReducer from "../slices/page/pageSettingsSlice";
 
 const store = configureStore({
     reducer: {
