@@ -18,7 +18,7 @@ const apiSlice = createApi({
                 return `/coins/markets?vs_currency=${currency}&order=${order}&per_page=100&page=${pageNumber}&sparkline=false&price_change_percentage=${priceChange}`
             }
         }),
-        getCoin: builder.query<CoinApiResult[], string>({
+        getCoin: builder.query<CoinApiResult, string>({
             query: (coin) => `/coins/${coin}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false`
         }),
         getTickers: builder.query<TickerApiResult[], string>({
