@@ -4,15 +4,22 @@ type SupportedCurrencies = "btc" | "eth" | "ltc" | "bch" | "bnb" | "eos" | "xrp"
 export type ListApiOrder = "market_cap_desc" | "market_cap_asc" | "volume_asc" | "volume_desc"
 export type ListApiPriceChange = '1h' | '24h' | '7d' | '14d' | '30d' | '200d' | '1y'
 
-export interface ListApiInput {
+export interface ListApiSettings {
     currency: SupportedCurrencies,
     order: ListApiOrder,
     pageNumber: number,
     priceChange: ListApiPriceChange
 }
 
-export interface ChartApiInput {
-    coin: string,
+export interface ChartApiSettings {
     currency: SupportedCurrencies,
     days: number | 'max'
+}
+
+export interface ApiSettings {
+    coin: string,
+    charts: {
+        currency: SupportedCurrencies,
+        days: number
+    }
 }

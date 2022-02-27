@@ -4,19 +4,12 @@ import { RootState } from '../app/store'
 import styled from 'styled-components'
 import { nanoid } from '@reduxjs/toolkit'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
-import { useGetListQuery } from '../slices/api/apiSlice'
 import Coin from '../components/Coin'
 
 const Home: NextPage = () => {
     const pageSettings = useAppSelector((state: RootState) => state.pageSettings)
-    const dispatch = useAppDispatch();
-    const {
-        data: coins,
-        isFetching: isListQueryFetching,
-        isSuccess: isListQuerySuccess
-    } = useGetListQuery(pageSettings);
-    console.log(coins);
-    const renderCoins = coins?.map((c) => {
+ 
+    /* const renderCoins = coins?.map((c) => {
             const priceChange = () => {
                 if (c.price_change_percentage_1y_in_currency) return c.price_change_percentage_1y_in_currency;
                 if (c.price_change_percentage_200d_in_currency) return c.price_change_percentage_200d_in_currency;
@@ -38,7 +31,7 @@ const Home: NextPage = () => {
                 market_cap_rank={c.market_cap_rank}
                 price_change_percentage={priceChange()}                
             />
-        }) 
+        })  */
     
     
     return (
@@ -49,7 +42,7 @@ const Home: NextPage = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <h1 className='Home-title'>CoinCoffee ☕</h1>
-            {renderCoins}
+            
         </StyledHome>
     )
 }
