@@ -7,6 +7,7 @@ import { GetStaticProps, GetStaticPaths } from 'next'
 import Coin from '../components/Coin'
 import { nanoid } from '@reduxjs/toolkit'
 import PageNav from '../components/PageNav'
+import store from '../app/store'
 
 const Home: NextPage = ({ coins }: any) => {
     const pageSettings = useAppSelector((state: RootState) => state.pageSettings)
@@ -57,26 +58,11 @@ const Home: NextPage = ({ coins }: any) => {
     )
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-    const pageSettings = useAppSelector((state: RootState) => state.pageSettings)
-    const { currency, order, pageNumber, priceChange } = pageSettings; 
-  
-    return {
-        paths: {
-            params: {
-                currency,
-                order,
-                pageNumber,
-                priceChange
-            },
-        },
-        fallback: false
-    }
-}
 
-export const getStaticProps: GetStaticProps = async ( context ) => {
-    const { params } = context;
-    const response = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=1y`)
+export const getStaticProps: GetStaticProps = async () => {
+    const pageSettings = store.getState().pageSettings
+    const { currency, order, pageNumber, priceChange } = pageSettings
+    const response = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=${order}&per_page=100&page=${pageNumber}&sparkline=false&price_change_percentage=${priceChange}`)
     const data = await response.json()
 
     return {
