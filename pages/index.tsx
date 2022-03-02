@@ -2,14 +2,16 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import { RootState } from '../app/store'
 import styled from 'styled-components'
-import { nanoid } from '@reduxjs/toolkit'
-import { useAppDispatch, useAppSelector } from '../app/hooks'
+import { GetStaticProps } from 'next'
+import { useAppSelector } from '../app/hooks'
 import Coin from '../components/Coin'
+import { nanoid } from '@reduxjs/toolkit'
 
-const Home: NextPage = () => {
-    const pageSettings = useAppSelector((state: RootState) => state.pageSettings)
- 
-    /* const renderCoins = coins?.map((c) => {
+const Home: NextPage = ({ coins }: any) => {
+    // const pageSettings = useAppSelector((state: RootState) => state.pageSettings)
+    // const { currency, order, pageNumber, priceChange } = pageSettings; 
+
+    const renderCoins = coins?.map((c) => {
             const priceChange = () => {
                 if (c.price_change_percentage_1y_in_currency) return c.price_change_percentage_1y_in_currency;
                 if (c.price_change_percentage_200d_in_currency) return c.price_change_percentage_200d_in_currency;
@@ -31,7 +33,7 @@ const Home: NextPage = () => {
                 market_cap_rank={c.market_cap_rank}
                 price_change_percentage={priceChange()}                
             />
-        })  */
+        }) 
     
     
     return (
@@ -42,9 +44,20 @@ const Home: NextPage = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <h1 className='Home-title'>CoinCoffee ☕</h1>
-            
+            {renderCoins}
         </StyledHome>
     )
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+    const response = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false`)
+    const data = await response.json()
+
+    return {
+        props: {
+            coins: data
+        }
+    }
 }
 
 const StyledHome = styled.div`
