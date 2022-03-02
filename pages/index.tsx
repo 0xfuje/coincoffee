@@ -1,9 +1,9 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { RootState } from '../app/store'
+import { useAppSelector } from '../app/hooks'
 import styled from 'styled-components'
 import { GetStaticProps } from 'next'
-import { useAppSelector } from '../app/hooks'
 import Coin from '../components/Coin'
 import { nanoid } from '@reduxjs/toolkit'
 
@@ -50,7 +50,7 @@ const Home: NextPage = ({ coins }: any) => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-    const response = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false`)
+    const response = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=1y`)
     const data = await response.json()
 
     return {
