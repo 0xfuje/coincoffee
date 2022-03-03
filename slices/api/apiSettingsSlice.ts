@@ -1,37 +1,36 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { 
-    ApiSettings,
-    SupportedCurrencies
- } from "../../types";
 
+import { ListApiSettings, ListApiOrder, ListApiPriceChange, SupportedCurrencies } from "../../types";
 
-
-const initialState: ApiSettings = {
-    coin: '',
-    charts: {
-        currency: 'usd',
-        days: 60
-    }
+const initialState: ListApiSettings = {
+    currency: 'usd',
+    order: 'market_cap_desc',
+    pageNumber: 1,
+    priceChange: '1y'
 }
 
 const apiSettingsSlice = createSlice({
     name: 'api-settings',
     initialState,
     reducers: {
-        // Change Coin Api Settings
-        changeCoinApi(state, action: PayloadAction<string>) {
-            state.coin = action.payload
+        jumpToPage(state, action: PayloadAction<number>) {
+            state.pageNumber = action.payload
         },
-
-        // Change Chart Api Settings
-        changeChartApiCurrency(state, action: PayloadAction<SupportedCurrencies>) {
-            state.charts.currency = action.payload
+        changeFullPageSettings(state, action: PayloadAction<ListApiSettings>) {
+            state = action.payload
         },
-        changeChartApiDays(state, action: PayloadAction<number>) {
-            state.charts.days = action.payload
+        changeCurrency(state, action: PayloadAction<SupportedCurrencies>) {
+            state.currency = action.payload
+        },
+        changeOrder(state, action: PayloadAction<ListApiOrder>) {
+            state.order = action.payload
+        },
+        changePriceChange(state, action: PayloadAction<ListApiPriceChange>) {
+            state.priceChange = action.payload
         }
     }
 })
+
 
 /* const fetch_urls = {
     base: 'https://api.coingecko.com/api/v3',
@@ -42,4 +41,11 @@ const apiSettingsSlice = createSlice({
 } */
 
 
-export default apiSettingsSlice.reducer
+export const {
+    jumpToPage,
+    changeFullPageSettings,
+    changeCurrency,
+    changeOrder,
+    changePriceChange
+ } = apiSettingsSlice.actions
+export default apiSettingsSlice.reducer;

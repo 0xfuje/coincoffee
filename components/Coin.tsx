@@ -7,8 +7,8 @@ import { RootState } from '../app/store';
 import Image from 'next/image'
 
 function Coin(props: CoinProps) {
-    const pageSettings = useAppSelector((state: RootState) => state.pageSettings)
-    const { currency, order, pageNumber, priceChange } = pageSettings; 
+    const apiSettings = useAppSelector((state: RootState) => state.apiSettings)
+    const { currency, order, pageNumber, priceChange } = apiSettings; 
     return (
         <StyledCoin className='Coin'>
             <div className="Coin-identity">

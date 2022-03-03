@@ -15,11 +15,3 @@ export interface ChartApiSettings {
     currency: SupportedCurrencies,
     days: number | 'max'
 }
-
-export interface ApiSettings {
-    coin: string,
-    charts: {
-        currency: SupportedCurrencies,
-        days: number
-    }
-}

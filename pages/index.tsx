@@ -10,8 +10,8 @@ import PageNav from '../components/PageNav'
 import store from '../app/store'
 
 const Home: NextPage = ({ coins }: any) => {
-    const pageSettings = useAppSelector((state: RootState) => state.pageSettings)
-    const { currency, order, pageNumber, priceChange } = pageSettings; 
+    const apiSettings = useAppSelector((state: RootState) => state.apiSettings)
+    const { currency, order, pageNumber, priceChange } = apiSettings; 
 
     const renderCoins = coins?.map((c) => {
             const priceChange = () => {
@@ -60,8 +60,8 @@ const Home: NextPage = ({ coins }: any) => {
 
 
 export const getStaticProps: GetStaticProps = async () => {
-    const pageSettings = store.getState().pageSettings
-    const { currency, order, pageNumber, priceChange } = pageSettings
+    const apiSettings = store.getState().apiSettings
+    const { currency, order, pageNumber, priceChange } = apiSettings
     const response = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=${order}&per_page=100&page=${pageNumber}&sparkline=false&price_change_percentage=${priceChange}`)
     const data = await response.json()
 

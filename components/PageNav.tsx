@@ -5,8 +5,8 @@ import { RootState } from '../app/store';
 import Link from 'next/link';
 
 function PageNav() {
-    const pageSettings = useAppSelector((state: RootState) => state.pageSettings)
-    const { pageNumber } = pageSettings; 
+    const apiSettings = useAppSelector((state: RootState) => state.apiSettings)
+    const { pageNumber } = apiSettings; 
   return (
     <StyledPageNav className='PageNav'>
         {pageNumber > 1 ? <Link href={''}><a>{pageNumber - 1}</a></Link> : ''}
