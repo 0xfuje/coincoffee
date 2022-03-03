@@ -4,7 +4,6 @@ import apiSettingsReducer from "../slices/api/apiSettingsSlice";
 const store = configureStore({
     reducer: {
         apiSettings: apiSettingsReducer,
-        
     },
     
 })

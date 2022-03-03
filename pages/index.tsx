@@ -1,9 +1,8 @@
-import type { NextPage } from 'next'
+import type { GetServerSideProps, NextPage,  GetStaticProps, GetStaticPaths } from 'next'
 import Head from 'next/head'
 import { RootState } from '../app/store'
 import { useAppSelector } from '../app/hooks'
 import styled from 'styled-components'
-import { GetStaticProps, GetStaticPaths } from 'next'
 import Coin from '../components/Coin'
 import { nanoid } from '@reduxjs/toolkit'
 import PageNav from '../components/PageNav'
@@ -15,6 +14,7 @@ const Home: NextPage = ({ coins }: any) => {
 
     const renderCoins = coins?.map((c) => {
             const priceChange = () => {
+                // Fix later
                 if (c.price_change_percentage_1y_in_currency) return c.price_change_percentage_1y_in_currency;
                 if (c.price_change_percentage_200d_in_currency) return c.price_change_percentage_200d_in_currency;
                 if (c.price_change_percentage_30d_in_currency) return c.price_change_percentage_30d_in_currency;
@@ -58,8 +58,25 @@ const Home: NextPage = ({ coins }: any) => {
     )
 }
 
+// Static Site Generation
 
-export const getStaticProps: GetStaticProps = async () => {
+/* export const getStaticProps: GetStaticProps = async () => {
+    const apiSettings = store.getState().apiSettings
+    const { currency, order, pageNumber, priceChange } = apiSettings
+    const response = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=${order}&per_page=100&page=${pageNumber}&sparkline=false&price_change_percentage=${priceChange}`)
+    const data = await response.json()
+
+    return {
+        props: {
+            coins: data
+        }
+    }
+} */
+
+
+// Server Side Rendering
+
+export const getServerSideProps: GetServerSideProps = async () => {
     const apiSettings = store.getState().apiSettings
     const { currency, order, pageNumber, priceChange } = apiSettings
     const response = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=${order}&per_page=100&page=${pageNumber}&sparkline=false&price_change_percentage=${priceChange}`)
