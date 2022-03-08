@@ -16,14 +16,15 @@
 const theme = {
     font: {
         size: {
-            alpha: '3em',       // 48px
-            beta: '1.5em',      // 24px
-            gamma: '0.75em',    // 12px
-            delta: '0.625em',   // 10px
-            epsilon: '0.5em',   // 8px
+            alpha: '1.5em',     // 24px
+            beta: '1.125em',    // 18px
+            gamma: '0.875em',   // 14px
+            delta: '0.75em',    // 12px
+            epsilon: '0.625em', // 10px
+            zeta: '0.5em'       //  8px
         },
         weight: {
-            alpha: '500',
+            alpha: '600',
             beta: '400'
         }
     },
