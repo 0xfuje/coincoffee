@@ -10,15 +10,15 @@
 // theta
 // iota
 
-// omega = different from other
-// psi = different from other
+// omega = different from others
+// psi = different from others
 
 const theme = {
     font: {
         size: {
             alpha: '1.5em',     // 24px
-            beta: '1.125em',    // 18px
-            gamma: '0.875em',   // 14px
+            beta: '1.25em',    // 18px
+            gamma: '1em',   // 14px
             delta: '0.75em',    // 12px
             epsilon: '0.625em', // 10px
             zeta: '0.5em'       //  8px
@@ -26,7 +26,8 @@ const theme = {
         weight: {
             alpha: '600',
             beta: '400'
-        }
+        },
+        family: 'Montserrat, sans-serif',
     },
     color: {
         // color order is from darkest to lightest
@@ -41,7 +42,7 @@ const theme = {
         psi: '#EA3943'      // red
     },
     space: {
-        alpha: '4em',
+        alpha: '5em',
         beta: '3em',
         gamma: '2em',
         delta: '1.5em',

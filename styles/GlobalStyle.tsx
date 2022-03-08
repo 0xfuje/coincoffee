@@ -26,6 +26,18 @@ const GlobalStyle = createGlobalStyle`
     }
     :where([draggable="true"]) { -webkit-user-drag: element; }
     // CSS RESET END
+
+    body {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 14px;
+        color: ${props => props.theme.color.alpha};
+        background-color: ${props => props.theme.color.eta};
+        margin: ${props => props.theme.space.zeta};
+    }
+
+    button {
+        cursor: pointer;
+    }
 `
 
 export default GlobalStyle;

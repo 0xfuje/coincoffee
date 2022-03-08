@@ -2,13 +2,14 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import styled from 'styled-components'
 import { useAppSelector, useAppDispatch } from '../app/hooks'
-import CoinList from '../components/CoinList'
+import CoinTable from '../components/CoinTable'
 import { useGetListQuery } from '../slices/api/apiSlice'
 import PageSettings from '../components/PageSettings'
 import PageNavigation from '../components/PageNavigation'
 import { RootState } from '../app/store'
 import { changeCurrency, changeOrder, changePageNumber, changePriceChange } from '../slices/api/apiSettingsSlice'
 import { ListApiOrder, ListApiPriceChange, SupportedCurrencies } from '../types'
+import Heading from '../components/Heading'
 
 
 const Home: NextPage = () => {
@@ -40,25 +41,17 @@ const Home: NextPage = () => {
                 <meta name="description" content="Your daily dose of crypto caffeine, served in a delicious coffee" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <h1 className='Home-title'>CoinCoffee ☕</h1>
+            <Heading />
             <PageSettings
                 setCurrency={setCurrency}
                 setOrder={setOrder}
                 setPriceChange={setPriceChange}
             />
-            <div className="Home-list">
-                <div className="Home-list-header">
-                    <div className="Home-list-asset">cryptoasset</div>
-                    <div className="Home-list-price">price</div>
-                    <div className="Home-list-priceChange">{priceChange}%</div>
-                    <div className="Home-list-marketCap">market cap</div>
-                </div>
-            <CoinList coins={coins}/>
+            <CoinTable coins={coins} priceChange={priceChange}/>
             <PageNavigation 
                 pageNumber={pageNumber}
                 setPageNumber={setPageNumber}
             />
-            </div>
 
             
         </StyledHome>
@@ -68,9 +61,7 @@ const Home: NextPage = () => {
 
 const StyledHome = styled.div`
     .Home {
-        button {
-            cursor: pointer;
-        }
+        
     }
 `
 export default Home;

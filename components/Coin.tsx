@@ -5,26 +5,29 @@ import Image from 'next/image'
 import Link from 'next/link';
 
 function Coin(props: CoinProps) {
+    const order = (props.order === 'market_cap_desc')
+        ?   props.market_cap
+        :   props.total_volume
     return (
         <StyledCoin className='Coin'>
-            <Link href={`/coins/${props.id}`}>
-            <a>
-                <div className="Coin-identity">
-                    <span className='Coin-identity-rank'>#{props.market_cap_rank}</span>
-                    <Image className='Coin-identity-logo' src={props.image} width={'24px'} height={'24px'}/>
-                    <span className='Coin-identity-name'>{props.name}</span>
-                    <span className='Coin-identity-symbol'>{props.symbol}</span>
-                </div>
-                <div className="Coin-price">{props.current_price}</div>
-                <div className="Coin-priceChange">{props.price_change_percentage}%</div>
-                <div className="Coin-marketCap">{props.market_cap}</div>
-            </a>
-            </Link>
+                <td className="Coin-identity">
+                    <Link href={`/coins/${props.id}`}>
+                        <a>
+                            <span className='Coin-identity-rank'>{props.market_cap_rank}</span>
+                            <Image className='Coin-identity-logo' src={props.image} width={'24px'} height={'24px'}/>
+                            <span className='Coin-identity-name'>{props.name}</span>
+                            <span className='Coin-identity-symbol'>{props.symbol}</span>
+                        </a>
+                    </Link>
+                </td>
+                <td className="Coin-price">{props.current_price}</td>
+                <td className="Coin-priceChange">{props.price_change_percentage}%</td>
+                <td className="Coin-marketCap">{order}</td>
         </StyledCoin>
     )
     }
 
-const StyledCoin = styled.div`
+const StyledCoin = styled.tr`
     
 
 `
