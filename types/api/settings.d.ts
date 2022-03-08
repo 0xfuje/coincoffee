@@ -1,3 +1,4 @@
+import { SetStateAction } from "react";
 import { SupportedCurrencies, ListApiPageOrder } from "./helper";
 
 type SupportedCurrencies = "btc" | "eth" | "ltc" | "bch" | "bnb" | "eos" | "xrp" | "xlm" | "link" | "dot" | "yfi" | "usd" | "aed" | "ars" | "aud" | "bdt" | "bhd" | "bmd" | "brl" | "cad" | "chf" | "clp" | "cny" | "czk" | "dkk" | "eur" | "gbp" | "hkd" | "huf" | "idr" | "ils" | "inr" | "jpy" | "krw" | "kwd" | "lkr" | "mmk" | "mxn" | "myr" | "ngn" | "nok" | "nzd" | "php" | "pkr" | "pln" | "rub" | "sar" | "sek" | "sgd" | "thb" | "try" | "twd" | "uah" | "vef" | "vnd" | "zar" | "xdr" | "xag" | "xau" | "bits" | "sats";
@@ -12,6 +13,17 @@ export interface ListApiSettings {
 }
 
 export interface ChartApiSettings {
+    coin: string
     currency: SupportedCurrencies,
     days: number | 'max'
 }
+
+export interface PageSettingsProps {
+    currency: SupportedCurrencies
+    setCurrency: Dispatch<SetStateAction<SupportedCurrencies>>
+    order: ListApiOrder
+    setOrder: Dispatch<SetStateAction<ListApiOrder>>
+    priceChange: ListApiPriceChange
+    setPriceChange: Dispatch<SetStateAction<ListApiPriceChange>>
+}
+    
