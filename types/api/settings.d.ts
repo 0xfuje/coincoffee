@@ -20,10 +20,10 @@ export interface ChartApiSettings {
 
 export interface PageSettingsProps {
     currency: SupportedCurrencies
-    setCurrency: Dispatch<SetStateAction<SupportedCurrencies>>
     order: ListApiOrder
-    setOrder: Dispatch<SetStateAction<ListApiOrder>>
     priceChange: ListApiPriceChange
-    setPriceChange: Dispatch<SetStateAction<ListApiPriceChange>>
 }
-    
+
+export interface ApiSettings {
+    list: ListApiSettings
+}

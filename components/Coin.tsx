@@ -5,10 +5,9 @@ import Image from 'next/image'
 import Link from 'next/link';
 
 function Coin(props: CoinProps) {
-    const linkName = props.name.toLowerCase()
     return (
         <StyledCoin className='Coin'>
-            <Link href={`/coins/${linkName}`}>
+            <Link href={`/coins/${props.id}`}>
             <a>
                 <div className="Coin-identity">
                     <span className='Coin-identity-rank'>#{props.market_cap_rank}</span>

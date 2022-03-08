@@ -4,13 +4,16 @@ import styled from 'styled-components'
 
 interface PageNavProps {
     pageNumber: number,
-    setPageNumber: Dispatch<SetStateAction<number>>
+    changePageNumber: (pageNumber: number) => {
+        payload: number;
+        type: string;
+    }
 }
 
-function PageNavigation({ pageNumber, setPageNumber }: PageNavProps ) {
+function PageNavigation({ pageNumber, changePageNumber }: PageNavProps ) {
   return (
     <StyledPageNavigation className='PageNavigation'>
-        <button className='' onClick={() => setPageNumber(pageNumber + 1)}>Next Page</button>
+        <button className='' onClick={() => changePageNumber(pageNumber + 1)}>Next Page</button>
     </StyledPageNavigation>
   )
 }

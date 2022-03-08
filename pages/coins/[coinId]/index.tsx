@@ -16,7 +16,7 @@ export default CoinPage
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const response = await fetch(`https://api.coingecko.com/api/v3/coins/list`)
-    const data = await response.json();
+    const data = await response.json()
 
     const paths = data.map((coin: ListApiResult) => {
         return {
