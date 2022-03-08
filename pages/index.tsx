@@ -7,8 +7,8 @@ import { useGetListQuery } from '../slices/api/apiSlice'
 import PageSettings from '../components/PageSettings'
 import PageNavigation from '../components/PageNavigation'
 import { RootState } from '../app/store'
-import { jumpToPage } from '../slices/api/apiSettingsSlice'
-
+import { changeCurrency, changeOrder, changePageNumber, changePriceChange } from '../slices/api/apiSettingsSlice'
+import { ListApiOrder, ListApiPriceChange, SupportedCurrencies } from '../types'
 
 
 const Home: NextPage = () => {
@@ -28,11 +28,10 @@ const Home: NextPage = () => {
 
     const dispatch = useAppDispatch();
 
-    console.log(`Are coins fetching? ${isCoinsFetching}`)
-    console.log(`Are coins successfully fetched? ${isCoinsSuccess}`)
-
-    const changePageNumber = (pageNumber: number) => dispatch(changePageNumber(pageNumber))
-    
+    const setPageNumber = (pageNumber: number): any => dispatch(changePageNumber(pageNumber))
+    const setCurrency = (currency: SupportedCurrencies): any => dispatch(changeCurrency(currency))
+    const setOrder = (order: ListApiOrder): any => dispatch(changeOrder(order))
+    const setPriceChange = (priceChange: ListApiPriceChange): any => dispatch(changePriceChange(priceChange))
 
     return (
         <StyledHome className="Home">
@@ -42,10 +41,10 @@ const Home: NextPage = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <h1 className='Home-title'>CoinCoffee ☕</h1>
-            <PageSettings 
-                currency={currency}
-                order={order}
-                priceChange={priceChange}
+            <PageSettings
+                setCurrency={setCurrency}
+                setOrder={setOrder}
+                setPriceChange={setPriceChange}
             />
             <div className="Home-list">
                 <div className="Home-list-header">
@@ -57,7 +56,7 @@ const Home: NextPage = () => {
             <CoinList coins={coins}/>
             <PageNavigation 
                 pageNumber={pageNumber}
-                changePageNumber={changePageNumber}
+                setPageNumber={setPageNumber}
             />
             </div>
 

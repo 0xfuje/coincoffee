@@ -25,6 +25,7 @@ const apiSettingsSlice = createSlice({
         },
         changeOrder(state, action: PayloadAction<ListApiOrder>) {
             state.list.order = action.payload
+            state.list.pageNumber = 1
         },
         changePriceChange(state, action: PayloadAction<ListApiPriceChange>) {
             state.list.priceChange = action.payload
@@ -33,7 +34,7 @@ const apiSettingsSlice = createSlice({
 })
 
 export const {
-    jumpToPage,
+    changePageNumber,
     changeFullPageSettings,
     changeCurrency,
     changeOrder,

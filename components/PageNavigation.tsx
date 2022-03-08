@@ -4,16 +4,16 @@ import styled from 'styled-components'
 
 interface PageNavProps {
     pageNumber: number,
-    changePageNumber: (pageNumber: number) => {
+    setPageNumber: (pageNumber: number) => {
         payload: number;
         type: string;
     }
 }
 
-function PageNavigation({ pageNumber, changePageNumber }: PageNavProps ) {
+function PageNavigation({ pageNumber, setPageNumber }: PageNavProps ) {
   return (
     <StyledPageNavigation className='PageNavigation'>
-        <button className='' onClick={() => changePageNumber(pageNumber + 1)}>Next Page</button>
+        <button className='' onClick={() => setPageNumber(pageNumber + 1)}>Next Page</button>
     </StyledPageNavigation>
   )
 }

@@ -19,9 +19,9 @@ export interface ChartApiSettings {
 }
 
 export interface PageSettingsProps {
-    currency: SupportedCurrencies
-    order: ListApiOrder
-    priceChange: ListApiPriceChange
+    setCurrency: (currency: SupportedCurrencies) => any
+    setOrder: (order: ListApiOrder) => any
+    setPriceChange: (priceChange: ListApiPriceChange) => any
 }
 
 export interface ApiSettings {
