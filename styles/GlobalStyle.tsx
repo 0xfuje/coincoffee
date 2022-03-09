@@ -30,7 +30,7 @@ const GlobalStyle = createGlobalStyle`
     body {
         font-family: 'Montserrat', sans-serif;
         font-size: 14px;
-        color: ${props => props.theme.color.alpha};
+        color: ${props => props.theme.color.beta};
         background-color: ${props => props.theme.color.eta};
         margin: ${props => props.theme.space.zeta};
     }

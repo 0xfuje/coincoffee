@@ -45,25 +45,43 @@ function CoinTable({ coins, priceChange }: CoinTableProps) {
         }) 
     return (
         <StyledCoinTable className='CoinTable'>
-            <tr className="CoinTable-header">
+            <thead className="CoinTable-header">
                 <th className="CoinTable-header-asset">cryptoasset</th>
                 <th className="CoinTable-header-price">price</th>
                 <th className="CoinTable-header-priceChange">{priceChange}%</th>
                 <th className="CoinTable-header-order">
                     {(order === 'market_cap_desc') ? 'market cap' : 'volume'}
                 </th>
-            </tr>
+            </thead>
+            <tbody className='CoinTable-body'>
             {renderCoins}
+            </tbody>
         </StyledCoinTable>
     )
 }
 
 const StyledCoinTable = styled.table`
+    display: block;
+    width: 100%;
     .CoinTable {
         &-header {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
             font-size: ${props => props.theme.font.size.epsilon};
             text-transform: uppercase;
             border-bottom: 1px solid ${props => props.theme.color.epsilon};
+            &-order {
+                display: none;
+            }
+            &-priceChange {
+                justify-self: right;
+            }
+        }
+
+        &-body {
+            display: grid;
+            grid-auto-rows: 50px;
+            
         }
     }
 `
