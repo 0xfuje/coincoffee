@@ -41,7 +41,7 @@ const Home: NextPage = () => {
                 <meta name="description" content="Your daily dose of crypto caffeine, served in a delicious coffee" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Heading />
+            <Heading isSubTitleDisplayed={true} />
             <PageSettings
                 setCurrency={setCurrency}
                 setOrder={setOrder}

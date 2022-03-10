@@ -5,13 +5,17 @@ import {
     CoinApiResult,
     TickerApiResult,
     ChartApiResult,
-    ChartApiSettings
+    ChartApiSettings,
+    GlobalAPIResult
  } from '../../types';
 
 const apiSlice = createApi({
     reducerPath: 'api',
     baseQuery: fetchBaseQuery({ baseUrl: 'https://api.coingecko.com/api/v3'}),
     endpoints: (builder) => ({
+        getGlobal: builder.query<GlobalAPIResult, void>({
+            query: () => `/global`
+        }),
         getList: builder.query<ListApiResult[], ListApiSettings>({
             query: (args) => {
                 const {currency, order, pageNumber, priceChange} = args;
@@ -37,6 +41,7 @@ const apiSlice = createApi({
 export default apiSlice;
 
 export const {
+    useGetGlobalQuery,
     useGetListQuery,
     useGetCoinQuery,
     useGetChartQuery,

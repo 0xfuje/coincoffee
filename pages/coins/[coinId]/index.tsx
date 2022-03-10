@@ -1,10 +1,12 @@
 import React from 'react'
 import { ListApiResult } from '../../../types'
 import { GetStaticProps, GetStaticPaths } from 'next'
+import Heading from '../../../components/Heading'
 
 function CoinPage({ coinData }: any) {
     return (
         <>
+        <Heading isSubTitleDisplayed={false}/>
         <h1>{coinData.name}</h1>
         <h2>Price: ${coinData.market_data.current_price.usd}</h2>
         <h2>Market Cap: ${coinData.market_data.market_cap.usd}</h2>

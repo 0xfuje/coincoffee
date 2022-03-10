@@ -70,18 +70,34 @@ const StyledCoinTable = styled.table`
             font-size: ${props => props.theme.font.size.epsilon};
             text-transform: uppercase;
             border-bottom: 1px solid ${props => props.theme.color.epsilon};
+            margin: 0 auto;
+            max-width: 1000px;
+            @media screen and (min-width: ${props => props.theme.breakpoint.zeta}) {
+                grid-template-columns: 3fr 1fr 1fr 1fr;
+            };
             &-order {
                 display: none;
+                justify-self: right;
+                
+                @media screen and (min-width: ${props => props.theme.breakpoint.zeta}) {
+                    display: inline-block;
+                };
             }
             &-priceChange {
                 justify-self: right;
+            }
+            &-price {
+                @media screen and (min-width: ${props => props.theme.breakpoint.zeta}) {
+                justify-self: right;
+            };
             }
         }
 
         &-body {
             display: grid;
-            grid-auto-rows: 50px;
-            
+            grid-auto-rows: 4em;
+            margin: 0 auto;
+            max-width: 1000px;
         }
     }
 `

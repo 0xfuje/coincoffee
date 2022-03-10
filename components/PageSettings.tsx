@@ -59,6 +59,7 @@ function PageSettings({setCurrency, setOrder, setPriceChange}: PageSettingsProps
 }
 
 const StyledPageSettings = styled.div`
+
     margin-bottom: ${props => props.theme.space.gamma};
     display: flex;
     justify-content: center;

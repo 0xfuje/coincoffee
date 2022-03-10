@@ -32,11 +32,18 @@ const GlobalStyle = createGlobalStyle`
         font-size: 14px;
         color: ${props => props.theme.color.beta};
         background-color: ${props => props.theme.color.eta};
-        margin: ${props => props.theme.space.zeta};
+        
     }
 
     button {
         cursor: pointer;
+    }
+
+    .red { 
+        color: ${props => props.theme.color.psi}
+    }
+    .green { 
+        color: ${props => props.theme.color.omega}
     }
 `
 
