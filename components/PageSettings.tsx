@@ -2,7 +2,15 @@ import styled from 'styled-components'
 import React from 'react'
 import { ListApiOrder, ListApiPriceChange, PageSettingsProps, SupportedCurrencies } from '../types'
 
-function PageSettings({setCurrency, setOrder, setPriceChange}: PageSettingsProps) {
+function PageSettings(
+    {
+        setCurrency,
+        setOrder,
+        setPriceChange,
+        currency,
+        order,
+        priceChange
+    } : PageSettingsProps) {
   return (
     <StyledPageSettings className='PageSettings'>
         <div className="PageSettings-select">
@@ -11,6 +19,7 @@ function PageSettings({setCurrency, setOrder, setPriceChange}: PageSettingsProps
                 name="currency"
                 id="currency"
                 onChange={(e) => setCurrency(e.target.value as SupportedCurrencies)}
+                value={currency}
             >
                 <option value="usd">USD</option>
                 <option value="eur">EUR</option>
@@ -30,6 +39,7 @@ function PageSettings({setCurrency, setOrder, setPriceChange}: PageSettingsProps
                 name="timeFrame"
                 id="timeFrame"
                 onChange={(e) => setPriceChange(e.target.value as ListApiPriceChange)}
+                value={priceChange}
             >
                 <option value="1h">1h</option>
                 <option value="24h">24h</option>
@@ -47,6 +57,7 @@ function PageSettings({setCurrency, setOrder, setPriceChange}: PageSettingsProps
                 className='PageSettings-select-order' 
                 name="order" id="order" 
                 onChange={(e) => setOrder(e.target.value as ListApiOrder)}
+                value={order}
             >
                 <option value="market_cap_desc">Market cap</option>
                 <option value="volume_desc">Volume</option>

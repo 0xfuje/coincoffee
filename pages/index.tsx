@@ -43,9 +43,9 @@ const Home: NextPage = () => {
             </Head>
             <Heading isSubTitleDisplayed={true} />
             <PageSettings
-                setCurrency={setCurrency}
-                setOrder={setOrder}
-                setPriceChange={setPriceChange}
+                setCurrency={setCurrency} currency={currency}
+                setOrder={setOrder} order={order}
+                setPriceChange={setPriceChange} priceChange={priceChange}
             />
             <CoinTable coins={coins} priceChange={priceChange}/>
             <PageNavigation 

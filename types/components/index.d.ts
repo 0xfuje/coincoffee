@@ -1,4 +1,4 @@
-import { ListApiOrder } from "../api/settings";
+import { ListApiOrder, SupportedCurrencies, ListApiPriceChange } from "../api/settings";
 export interface CoinProps {
     id:                               string;
     symbol:                           string;
@@ -10,4 +10,13 @@ export interface CoinProps {
     market_cap_rank:                  number;
     price_change_percentage:          string;
     order:                      ListApiOrder;
+}
+
+export interface PageSettingsProps {
+    setCurrency: (currency: SupportedCurrencies) => any
+    setOrder: (order: ListApiOrder) => any
+    setPriceChange: (priceChange: ListApiPriceChange) => any
+    currency: SupportedCurrencies
+    order: ListApiOrder
+    priceChange: ListApiPriceChange
 }

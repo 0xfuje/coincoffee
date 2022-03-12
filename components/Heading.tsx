@@ -2,6 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { useGetGlobalQuery } from '../slices/api/apiSlice'
 import { convertNum } from '../helpers'
+import Link from 'next/link'
+
 interface HeadingProps {
     readonly isSubTitleDisplayed: boolean
 }
@@ -13,7 +15,6 @@ function Heading({isSubTitleDisplayed}: HeadingProps) {
         isFetching,
         isSuccess,
     } = useGetGlobalQuery();
-    console.log(global?.data)
     const marketCap = convertNum(global?.data.total_market_cap.usd!)
     const volume = convertNum(global?.data.total_volume.usd!)
 
@@ -44,7 +45,7 @@ function Heading({isSubTitleDisplayed}: HeadingProps) {
                     <a className='Heading-stats-link'>{global?.data.market_cap_percentage.eth.toFixed(1)}%</a>
                 </div>
             </div>
-            <h1 className='Heading-title'>CoinCoffee ☕</h1>
+            <Link href='/'><a><h1 className='Heading-title'>CoinCoffee ☕</h1></a></Link>
             <p className="Heading-subtitle">Your daily dose of crypto caffeine, served in a delicious coffee</p>
             <hr className="Heading-line" />
         </StyledHeading>
@@ -54,9 +55,11 @@ function Heading({isSubTitleDisplayed}: HeadingProps) {
 const StyledHeading = styled.div<HeadingProps>`
     .Heading {
         &-stats {
+            max-width: ${props => props.theme.max_width};
             display: none;
             gap: ${props => props.theme.space.delta};
-            margin: ${props => props.theme.space.zeta};
+            margin: ${props => props.theme.space.zeta} auto;
+            padding-left: ${props => props.theme.space.zeta};
             font-size: ${props => props.theme.font.size.delta};
             @media screen and (min-width: ${props => props.theme.breakpoint.zeta}) {
                 display: flex;

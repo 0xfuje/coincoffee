@@ -18,11 +18,7 @@ export interface ChartApiSettings {
     days: number | 'max'
 }
 
-export interface PageSettingsProps {
-    setCurrency: (currency: SupportedCurrencies) => any
-    setOrder: (order: ListApiOrder) => any
-    setPriceChange: (priceChange: ListApiPriceChange) => any
-}
+
 
 export interface ApiSettings {
     list: ListApiSettings

@@ -21,7 +21,6 @@ const theme = {
             gamma: '1em',   // 14px
             delta: '0.75em',    // 12px
             epsilon: '0.625em', // 10px
-            zeta: '0.5em'       //  8px
         },
         weight: {
             alpha: '600',
@@ -60,7 +59,8 @@ const theme = {
         epsilon: '768px ',
         zeta: '600px',
         eta: '480px',
-    }
+    },
+    max_width: '1200px'
 }
 
 

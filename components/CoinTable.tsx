@@ -63,15 +63,18 @@ function CoinTable({ coins, priceChange }: CoinTableProps) {
 const StyledCoinTable = styled.table`
     display: block;
     width: 100%;
+    margin: ${props => props.theme.space.eta};
+
     .CoinTable {
         &-header {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr;
             font-size: ${props => props.theme.font.size.epsilon};
             text-transform: uppercase;
+            padding-bottom: 3px;
             border-bottom: 1px solid ${props => props.theme.color.epsilon};
             margin: 0 auto;
-            max-width: 1000px;
+            max-width: ${props => props.theme.max_width};
             @media screen and (min-width: ${props => props.theme.breakpoint.zeta}) {
                 grid-template-columns: 3fr 1fr 1fr 1fr;
             };
@@ -97,7 +100,7 @@ const StyledCoinTable = styled.table`
             display: grid;
             grid-auto-rows: 4em;
             margin: 0 auto;
-            max-width: 1000px;
+            max-width: ${props => props.theme.max_width};
         }
     }
 `

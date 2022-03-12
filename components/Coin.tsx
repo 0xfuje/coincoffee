@@ -98,11 +98,16 @@ const StyledCoin = styled.tr`
         &-priceParent {
             display: flex;
             flex-direction: column;
+            
             @media screen and (min-width: ${props => props.theme.breakpoint.zeta}) {
                 justify-self: right;
             };
             &-price {
-                // font-weight: ${props => props.theme.font.weight.alpha};
+                font-weight: ${props => props.theme.font.weight.alpha};
+                @media screen and (min-width: ${props => props.theme.breakpoint.zeta}) {
+                    font-weight: ${props => props.theme.font.weight.beta};
+                };
+                
             }
             &-order {
                 @media screen and (min-width: ${props => props.theme.breakpoint.zeta}) {
