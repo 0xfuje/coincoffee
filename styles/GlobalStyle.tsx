@@ -39,12 +39,10 @@ const GlobalStyle = createGlobalStyle`
         cursor: pointer;
     }
 
-    .red { 
-        color: ${props => props.theme.color.psi}
-    }
-    .green { 
-        color: ${props => props.theme.color.omega}
-    }
+    .red { color: ${props => props.theme.color.psi} }
+    .green { color: ${props => props.theme.color.omega} }
+    .red-bg { background-color: ${props => props.theme.color.psi} }
+    .green-bg { background-color: ${props => props.theme.color.omega} }
 `
 
 export default GlobalStyle;

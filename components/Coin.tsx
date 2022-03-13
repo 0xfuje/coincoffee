@@ -20,7 +20,7 @@ function Coin(props: CoinProps) {
     return (
         <StyledCoin className='Coin'>
             <span className='Coin-rank'>{props.market_cap_rank}</span>
-            <td className="Coin-identity">
+            <div className="Coin-identity">
             <Link href={`/coins/${props.id}`}>
                 <a><Image className='Coin-identity-logo' src={props.image} width={'24px'} height={'24px'} /></a>
             </Link>
@@ -30,18 +30,18 @@ function Coin(props: CoinProps) {
                     </Link>
                     <span className='Coin-identity-symbol'>{props.symbol}</span>
                 </div>
-            </td>
-            <td className="Coin-priceParent">
+            </div>
+            <div className="Coin-priceParent">
                 <Link href={`/coins/${props.id}`}><a className='Coin-priceParent-price'>${props.current_price}</a></Link>
                 <span className='Coin-priceParent-order'>${convertNum(order!)}</span>
-            </td>
-            <td className={`Coin-priceChange ${priceChangeClass()}`}>{priceChange}</td>
-            <td className='Coin-order'>${convertNum(order!)}</td>
+            </div>
+            <div className={`Coin-priceChange ${priceChangeClass()}`}>{priceChange}</div>
+            <div className='Coin-order'>${convertNum(order!)}</div>
         </StyledCoin>
     )
 }
 
-const StyledCoin = styled.tr`
+const StyledCoin = styled.div`
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
     align-items: center;

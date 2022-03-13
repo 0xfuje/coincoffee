@@ -4,3 +4,8 @@ export const convertNum = (num: number) => {
     if (num > billion) return `${(num / billion).toFixed(2)}B`
     if (num > million) return `${(num / million).toFixed(2)}M`
 }
+
+export const convertColor = (num: number) => {
+    if (num >= 0) return 'green'
+    if (num < 0) return 'red'
+}

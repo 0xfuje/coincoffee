@@ -45,22 +45,22 @@ function CoinTable({ coins, priceChange }: CoinTableProps) {
         }) 
     return (
         <StyledCoinTable className='CoinTable'>
-            <thead className="CoinTable-header">
-                <th className="CoinTable-header-asset">cryptoasset</th>
-                <th className="CoinTable-header-price">price</th>
-                <th className="CoinTable-header-priceChange">{priceChange}%</th>
-                <th className="CoinTable-header-order">
+            <div className="CoinTable-header">
+                <span className="CoinTable-header-asset">cryptoasset</span>
+                <span className="CoinTable-header-price">price</span>
+                <span className="CoinTable-header-priceChange">{priceChange}%</span>
+                <span className="CoinTable-header-order">
                     {(order === 'market_cap_desc') ? 'market cap' : 'volume'}
-                </th>
-            </thead>
-            <tbody className='CoinTable-body'>
+                </span>
+            </div>
+            <div className='CoinTable-body'>
             {renderCoins}
-            </tbody>
+            </div>
         </StyledCoinTable>
     )
 }
 
-const StyledCoinTable = styled.table`
+const StyledCoinTable = styled.div`
     display: block;
     width: 100%;
     margin: ${props => props.theme.space.eta};

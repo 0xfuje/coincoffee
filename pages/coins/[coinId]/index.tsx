@@ -2,59 +2,65 @@ import React, { useState } from 'react'
 import { ListApiResult } from '../../../types'
 import { GetStaticProps, GetStaticPaths } from 'next'
 import Heading from '../../../components/Heading'
-import Image from 'next/image'
 import { CoinApiResult } from '../../../types'
 import styled from 'styled-components'
-import Button from '../../../components/Button'
+import CoinIdHeader from '../../../components/coinId/CoinIdHeader'
+import CoinIdPrice from '../../../components/coinId/CoinIdPrice'
+import { useAppSelector } from '../../../app/hooks'
+import { RootState } from '../../../app/store'
+import CoinIdDescription from '../../../components/coinId/CoinIdDescription'
 
-interface CoinPageProps {
+interface CoinIdPageProps {
     coin: CoinApiResult
 }
 
-function CoinPage({ coin }: CoinPageProps) {
+type ActiveTab = 'chart' | 'markets' | 'price-stats' | 'description';
+
+function CoinIdPage({ coin }: CoinIdPageProps) {
+    const pageSettings = useAppSelector((state: RootState) => state.apiSettings)
+    const { currency } = pageSettings.list;
+    const [activeTab, setActiveTab] = useState<ActiveTab>('chart')
     
     return (
-        <StyledCoinPage>
+        <StyledCoinIdPage>
             <Heading isSubTitleDisplayed={false}/>
-            <div className="CoinPage">
-                <div className="CoinPage-Header">
-                    <Image src={coin.image.small} width='36px' height='36px'/>
-                    <h1 className='CoinPage-Header-name'>{coin.name}</h1>
-                    <Button text={`Rank #${coin.market_cap_rank}`}size="small" />
-                    <Button text={coin.symbol.toUpperCase()} size="small" />
-                    
-                </div>
+            <div className="CoinIdPage">
+                <CoinIdHeader 
+                    name={coin.name}
+                    symbol={coin.symbol}
+                    logo={coin.image.large}
+                    market_cap_rank={coin.market_cap_rank}
+                />
+                <CoinIdPrice
+                    name={coin.name}
+                    price={coin.market_data.current_price[currency]}
+                    low_24h={coin.market_data.low_24h[currency]}
+                    high_24h={coin.market_data.high_24h[currency]}
+                    change_24h={coin.market_data.price_change_percentage_24h}
+                    btc={coin.market_data.current_price.btc}
+                    eth={coin.market_data.current_price.eth}
+                />
+               {/*  <CoinIdDescription
+                    name={coin.name}
+                    description={coin.description.en}
+                /> */}
                 
-                <h2>Price: ${coin.market_data.current_price.usd}</h2>
             </div>
            
-        </StyledCoinPage>
+        </StyledCoinIdPage>
     )
 }
 
-const StyledCoinPage = styled.div`
-    .CoinPage {
+const StyledCoinIdPage = styled.div`
+    .CoinIdPage {
         margin: ${props => props.theme.space.eta};
-        &-Header {
-            display: flex;
-            align-items: center;
-            gap: ${props => props.theme.space.zeta};
-            &-name {
-                font-size: ${props => props.theme.font.size.beta};
-                font-weight: ${props => props.theme.font.weight.alpha};
-            }
-            &-rank {
-
-            }
-            &-symbol {
-                text-transform: uppercase;
-            }
-
+        &-tabs {
+            margin-top: ${props => props.theme.space.delta};
         }
     }
 `
 
-export default CoinPage
+export default CoinIdPage
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const response = await fetch(`https://api.coingecko.com/api/v3/coins/list`)
