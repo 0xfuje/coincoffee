@@ -32,7 +32,6 @@ const GlobalStyle = createGlobalStyle`
         font-size: 14px;
         color: ${props => props.theme.color.beta};
         background-color: ${props => props.theme.color.eta};
-        
     }
 
     button {

@@ -4,35 +4,35 @@ import Image from 'next/image'
 import Button from '../Button'
 import Link from 'next/link'
 
-interface CoinIdHeaderProps {
+interface HeaderProps {
     logo: string,
     name: string,
     market_cap_rank: number,
     symbol: string
 }
 
-function CoinIdHeader({logo, name, market_cap_rank, symbol}: CoinIdHeaderProps) {
+function Header({logo, name, market_cap_rank, symbol}: HeaderProps) {
   return (
-    <StyledCoinIdHeader className="CoinIdHeader">
-        <div className="CoinIdHeader-nav">
-            <span className='CoinIdHeader-nav-link'><Link href='/'><a>Coins</a></Link></span>
-            <span className='CoinIdHeader-nav-span'> &nbsp;&gt;&nbsp; </span>
-            <span className='CoinIdHeader-nav-current'>Bitcoin</span>
+    <StyledHeader className="Header">
+        <div className="Header-nav">
+            <span className='Header-nav-link'><Link href='/'><a>Coins</a></Link></span>
+            <span className='Header-nav-span'> &nbsp;&gt;&nbsp; </span>
+            <span className='Header-nav-current'>Bitcoin</span>
         </div>
-        <div className="CoinIdHeader-info">
+        <div className="Header-info">
             <Image src={logo} width='36px' height='36px'/>
-            <h1 className='CoinIdHeader-info-name'>{name}</h1>
+            <h1 className='Header-info-name'>{name}</h1>
             <Button text={`Rank #${market_cap_rank}`}size="small" />
             <Button text={symbol.toUpperCase()} size="small" />
         </div>
        
-    </StyledCoinIdHeader>
+    </StyledHeader>
   )
 }
 
-const StyledCoinIdHeader = styled.div`
+const StyledHeader = styled.div`
     margin-bottom: ${props => props.theme.space.epsilon};
-    .CoinIdHeader {
+    .Header {
         &-nav {
             font-size: ${props => props.theme.font.size.delta};
             margin-bottom: ${props => props.theme.space.epsilon};
@@ -71,4 +71,4 @@ const StyledCoinIdHeader = styled.div`
         
 `
 
-export default CoinIdHeader
+export default Header

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-interface CoinIdProps {
+interface PriceProps {
     name: string,
     price: number,
     low_24h: number,
@@ -10,48 +10,49 @@ interface CoinIdProps {
     btc: number,
     eth: number
 }
-interface StyledCoinIdProps {
+interface StyledPriceProps {
     readonly isPriceChangePos: boolean
 }
 
 
-
-function CoinId({name, price, low_24h, high_24h, change_24h, btc, eth}: CoinIdProps) {
+function Price({name, price, low_24h, high_24h, change_24h, btc, eth}: PriceProps) {
     const isPriceChangePos: boolean = (change_24h >= 0) ? true : false
     const change_24h_perc = (change_24h).toFixed(1)
     const change_24h_prefix = isPriceChangePos ? '+' : ''
     return (
-        <StyledCoinId className='CoinId' isPriceChangePos={isPriceChangePos}>
-            <p className='CoinId-name'>{name} Price</p>
-            <div className="CoinId-row">
-                <div className="CoinId-price">
-                    <h2 className="CoinId-price-current">${price}</h2>
-                    <span className='CoinId-price-change'>{change_24h_prefix}{change_24h_perc}%</span>
+        <StyledPrice className='Price' isPriceChangePos={isPriceChangePos}>
+            <p className='Price-name'>{name} Price</p>
+            <div className="Price-row">
+                <div className="Price-price">
+                    <h2 className="Price-price-current">${price}</h2>
+                    <span className='Price-price-change'>{change_24h_prefix}{change_24h_perc}%</span>
                 </div>
-                <div className="CoinId-crypto">
-                    <span className="CoinId-crypto-btc">{btc} BTC</span>
-                    <span className="CoinId-crypto-eth">{eth} ETH</span>
+                <div className="Price-crypto">
+                    <span className="Price-crypto-btc">{btc} BTC</span>
+                    <span className="Price-crypto-eth">{eth} ETH</span>
                 </div>
             </div>
          
             
-            <div className="CoinId-bar">
-                <div className='CoinId-bar-low'>
-                    <span className='CoinId-bar-text'>Low:</span>
-                    <span className='CoinId-bar-price'>${low_24h}</span>
+            <div className="Price-bar">
+                <div className='Price-bar-low'>
+                    <span className='Price-bar-text'>Low:</span>
+                    <span className='Price-bar-price'>${low_24h}</span>
                 </div>
-                <div className="CoinId-bar-line"></div>
-                <div className='CoinId-bar-high'>
-                    <span className='CoinId-bar-text'>High:</span>
-                    <span className='CoinId-bar-price'>${high_24h}</span>
+                <div className="Price-bar-line"></div>
+                <div className='Price-bar-high'>
+                    <span className='Price-bar-text'>High:</span>
+                    <span className='Price-bar-price'>${high_24h}</span>
                 </div>    
             </div>
-        </StyledCoinId>
+        </StyledPrice>
     )
 }
 
-const StyledCoinId = styled.div<StyledCoinIdProps>`
-    .CoinId {
+const StyledPrice = styled.div<StyledPriceProps>`
+    max-width: 320px;
+    margin-bottom: ${props => props.theme.space.beta};
+    .Price {
         &-name {
             color: ${props => props.theme.color.delta};
             font-size: ${props => props.theme.font.size.delta};
@@ -114,4 +115,4 @@ const StyledCoinId = styled.div<StyledCoinIdProps>`
     }
 `
 
-export default CoinId
+export default Price
