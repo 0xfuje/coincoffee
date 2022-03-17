@@ -139,6 +139,8 @@ enum TargetCoinID {
 
 enum TrustScore {
   Green = "green",
+  Yellow = "yellow",
+  Red = "red"
 }
 
 

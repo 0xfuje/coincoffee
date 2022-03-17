@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import styled from 'styled-components'
 import { useAppSelector, useAppDispatch } from '../app/hooks'
-import CoinTable from '../components/CoinTable'
+import CoinList from '../components/list/CoinList'
 import { useGetListQuery } from '../slices/api/apiSlice'
 import PageSettings from '../components/PageSettings'
 import PageNavigation from '../components/PageNavigation'
@@ -47,7 +47,7 @@ const Home: NextPage = () => {
                 setOrder={setOrder} order={order}
                 setPriceChange={setPriceChange} priceChange={priceChange}
             />
-            <CoinTable coins={coins} priceChange={priceChange}/>
+            <CoinList coins={coins} priceChange={priceChange}/>
             <PageNavigation 
                 pageNumber={pageNumber}
                 setPageNumber={setPageNumber}

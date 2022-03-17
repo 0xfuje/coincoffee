@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Image from 'next/image'
-import Button from '../Button'
+import {default as MyLink} from '../Link' // Named as bc nextjs compatibility issue
 import Link from 'next/link'
 
 interface HeaderProps {
@@ -17,13 +17,13 @@ function Header({logo, name, market_cap_rank, symbol}: HeaderProps) {
         <div className="Header-nav">
             <span className='Header-nav-link'><Link href='/'><a>Coins</a></Link></span>
             <span className='Header-nav-span'> &nbsp;&gt;&nbsp; </span>
-            <span className='Header-nav-current'>Bitcoin</span>
+            <span className='Header-nav-current'>{name}</span>
         </div>
         <div className="Header-info">
             <Image src={logo} width='36px' height='36px'/>
             <h1 className='Header-info-name'>{name}</h1>
-            <Button text={`Rank #${market_cap_rank}`}size="small" />
-            <Button text={symbol.toUpperCase()} size="small" />
+            <MyLink text={`Rank #${market_cap_rank}`}size="small" />
+            <MyLink text={symbol.toUpperCase()} size="small" />
         </div>
        
     </StyledHeader>

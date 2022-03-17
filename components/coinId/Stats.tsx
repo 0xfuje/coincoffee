@@ -17,9 +17,10 @@ interface StatsProps {
     atl_date: string,
     atl_change_percentage: number,
     circulating_supply: number,
-    total_supply: null | number,
-    max_supply: null | number
-    cur: string
+    total_supply?: null | number,
+    max_supply?: null | number
+    cur: string,
+    full_valuation: number
 }
 
 
@@ -27,7 +28,7 @@ interface StatsProps {
 function Stats({
     cur, name, symbol, price, market_cap, volume, low_24h, high_24h,
     market_cap_rank, ath, ath_date, ath_change_percentage, atl, atl_date,
-    atl_change_percentage, circulating_supply, total_supply, max_supply
+    atl_change_percentage, circulating_supply, total_supply, max_supply, full_valuation
 }: StatsProps) {
   return (
     <StyledStats className='Stats'>
@@ -35,19 +36,25 @@ function Stats({
         <ul className="Stats-list">
             <li className='Stats-list-item'>
                 <span className='Stats-list-item-description'>{name} price</span>
-                <span className='Stats-list-item-stat'>{cur}{price}</span>
+                <span className='Stats-list-item-stat'>{cur}{price.toLocaleString()}</span>
             </li>
             <li className='Stats-list-item'>
                 <span className='Stats-list-item-description'>Market cap</span>
-                <span className='Stats-list-item-stat'>{cur}{market_cap}</span>
+                <span className='Stats-list-item-stat'>{cur}{market_cap.toLocaleString()}</span>
             </li>
+            {full_valuation ? 
+                <li className='Stats-list-item'>
+                    <span className='Stats-list-item-description'>Fully diluted valuation</span>
+                    <span className='Stats-list-item-stat'>{cur}{full_valuation.toLocaleString()}</span>
+                </li>
+            : ''}
             <li className='Stats-list-item'>
                 <span className='Stats-list-item-description'>Volume</span>
-                <span className='Stats-list-item-stat'>{cur}{volume}</span>
+                <span className='Stats-list-item-stat'>{cur}{volume.toLocaleString()}</span>
             </li>
             <li className='Stats-list-item'>
                 <span className='Stats-list-item-description'>24H low / 24H high</span>
-                <span className='Stats-list-item-stat'>{cur}{low_24h} / {cur}{high_24h}</span>
+                <span className='Stats-list-item-stat'>{cur}{low_24h.toLocaleString()} / {cur}{high_24h.toLocaleString()}</span>
             </li>
             <li className='Stats-list-item'>
                 <span className='Stats-list-item-description'>Market cap rank</span>
@@ -59,7 +66,7 @@ function Stats({
                 </span>
                 <div className="Stats-list-item-ath-flex">
                     <div className='Stats-list-item-ath-div'>
-                        <span className='Stats-list-item-ath-stat'>{cur}{ath} </span>
+                        <span className='Stats-list-item-ath-stat'>{cur}{ath.toLocaleString()} </span>
                         <span className='Stats-list-item-ath-percentage'>{ath_change_percentage.toFixed(1)}%</span>
                     </div>
                     <span className='Stats-list-item-ath-date'>
@@ -73,7 +80,7 @@ function Stats({
                 </span>
                 <div className="Stats-list-item-atl-flex">
                     <span className='Stats-list-item-atl-div'>
-                        <span className='Stats-list-item-atl-stat'>{cur}{atl} </span>
+                        <span className='Stats-list-item-atl-stat'>{cur}{atl.toLocaleString()} </span>
                         <span className='Stats-list-item-atl-percentage'>+{atl_change_percentage.toFixed(1)}%</span>
                     </span>
                     <span className='Stats-list-item-atl-date'>
@@ -83,18 +90,18 @@ function Stats({
             </li>
             <li className='Stats-list-item'>
                 <span className='Stats-list-item-description'>Circulating Supply</span>
-                <span className='Stats-list-item-stat'>{circulating_supply?.toFixed()}</span>
+                <span className='Stats-list-item-stat'>{circulating_supply?.toLocaleString()}</span>
             </li>
             {total_supply ? 
                 <li className='Stats-list-item'>
                     <span className='Stats-list-item-description'>Total Supply</span>
-                    <span className='Stats-list-item-stat'>{total_supply?.toFixed()}</span>
+                    <span className='Stats-list-item-stat'>{total_supply?.toLocaleString()}</span>
                 </li>
             : ''}
             {max_supply ? 
                 <li className='Stats-list-item'>
                     <span className='Stats-list-item-description'>Max Supply</span>
-                    <span className='Stats-list-item-stat'>{max_supply?.toFixed()}</span>
+                    <span className='Stats-list-item-stat'>{max_supply?.toLocaleString()}</span>
                 </li>
             : ''}
         </ul>
@@ -103,6 +110,7 @@ function Stats({
 }
 
 const StyledStats = styled.div`
+    max-width: ${props => props.theme.breakpoint.zeta};
     .Stats {
         &-title {
             position: relative;

@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components';
-import { CoinProps } from '../types';
+import { CoinProps } from '../../types';
 import Image from 'next/image'
 import Link from 'next/link';
-import { convertNum } from '../helpers';
+import { convertNum } from '../../helpers';
 
 function Coin(props: CoinProps) {
     const order = (props.order === 'market_cap_desc')
@@ -32,7 +32,7 @@ function Coin(props: CoinProps) {
                 </div>
             </div>
             <div className="Coin-priceParent">
-                <Link href={`/coins/${props.id}`}><a className='Coin-priceParent-price'>${props.current_price}</a></Link>
+                <Link href={`/coins/${props.id}`}><a className='Coin-priceParent-price'>${props.current_price.toLocaleString()}</a></Link>
                 <span className='Coin-priceParent-order'>${convertNum(order!)}</span>
             </div>
             <div className={`Coin-priceChange ${priceChangeClass()}`}>{priceChange}</div>

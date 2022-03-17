@@ -2,16 +2,16 @@ import React from 'react'
 import Coin from './Coin';
 import { nanoid } from '@reduxjs/toolkit';
 import styled from 'styled-components';
-import { ListApiPriceChange, ListApiResult } from '../types';
-import { useAppSelector } from '../app/hooks';
-import { RootState } from '../app/store'
+import { ListApiPriceChange, ListApiResult } from '../../types';
+import { useAppSelector } from '../../app/hooks';
+import { RootState } from '../../app/store'
 
-interface CoinTableProps {
+interface CoinListProps {
     coins: ListApiResult[] | undefined,
     priceChange: ListApiPriceChange
 }
 
-function CoinTable({ coins, priceChange }: CoinTableProps) {
+function CoinList({ coins, priceChange }: CoinListProps) {
 
     const pageSettings = useAppSelector((state: RootState) => state.apiSettings)
     const { order } = pageSettings.list;
@@ -44,28 +44,28 @@ function CoinTable({ coins, priceChange }: CoinTableProps) {
             />
         }) 
     return (
-        <StyledCoinTable className='CoinTable'>
-            <div className="CoinTable-header">
-                <span className="CoinTable-header-asset">cryptoasset</span>
-                <span className="CoinTable-header-price">price</span>
-                <span className="CoinTable-header-priceChange">{priceChange}%</span>
-                <span className="CoinTable-header-order">
+        <StyledCoinList className='CoinList'>
+            <div className="CoinList-header">
+                <span className="CoinList-header-asset">cryptoasset</span>
+                <span className="CoinList-header-price">price</span>
+                <span className="CoinList-header-priceChange">{priceChange}%</span>
+                <span className="CoinList-header-order">
                     {(order === 'market_cap_desc') ? 'market cap' : 'volume'}
                 </span>
             </div>
-            <div className='CoinTable-body'>
+            <div className='CoinList-body'>
             {renderCoins}
             </div>
-        </StyledCoinTable>
+        </StyledCoinList>
     )
 }
 
-const StyledCoinTable = styled.div`
+const StyledCoinList = styled.div`
     display: block;
     width: 100%;
     margin: ${props => props.theme.space.eta};
 
-    .CoinTable {
+    .CoinList {
         &-header {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr;
@@ -105,4 +105,4 @@ const StyledCoinTable = styled.div`
     }
 `
 
-export default CoinTable
+export default CoinList

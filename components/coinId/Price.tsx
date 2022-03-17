@@ -24,7 +24,7 @@ function Price({name, price, low_24h, high_24h, change_24h, btc, eth}: PriceProp
             <p className='Price-name'>{name} Price</p>
             <div className="Price-row">
                 <div className="Price-price">
-                    <h2 className="Price-price-current">${price}</h2>
+                    <h2 className="Price-price-current">${price.toLocaleString()}</h2>
                     <span className='Price-price-change'>{change_24h_prefix}{change_24h_perc}%</span>
                 </div>
                 <div className="Price-crypto">
@@ -37,12 +37,12 @@ function Price({name, price, low_24h, high_24h, change_24h, btc, eth}: PriceProp
             <div className="Price-bar">
                 <div className='Price-bar-low'>
                     <span className='Price-bar-text'>Low:</span>
-                    <span className='Price-bar-price'>${low_24h}</span>
+                    <span className='Price-bar-price'>${low_24h.toLocaleString()}</span>
                 </div>
                 <div className="Price-bar-line"></div>
                 <div className='Price-bar-high'>
                     <span className='Price-bar-text'>High:</span>
-                    <span className='Price-bar-price'>${high_24h}</span>
+                    <span className='Price-bar-price'>${high_24h.toLocaleString()}</span>
                 </div>    
             </div>
         </StyledPrice>

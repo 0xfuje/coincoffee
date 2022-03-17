@@ -1,25 +1,28 @@
 import React, { useState } from 'react'
-import { ListApiResult } from '../../../types'
+import { ListApiResult, TickerApiResult } from '../../../types'
 import { GetStaticProps, GetStaticPaths } from 'next'
 import Heading from '../../../components/Heading'
 import { CoinApiResult } from '../../../types'
 import styled from 'styled-components'
 import { useAppSelector } from '../../../app/hooks'
 import { RootState } from '../../../app/store'
-import {Price, Header, Description, Stats} from '../../../components/coinId'
+import {Price, Header, Description, Stats, Ticker} from '../../../components/coinId'
+import Markets from '../../../components/coinId/Markets'
 
 interface CoinIdPageProps {
-    coin: CoinApiResult
+    coin: CoinApiResult,
+    tickers: TickerApiResult
 }
 
 type ActiveTab = 'chart' | 'markets' | 'price-stats' | 'description';
 
 
 
-function CoinIdPage({ coin }: CoinIdPageProps) {
+function CoinIdPage({ coin, tickers }: CoinIdPageProps) {
     const pageSettings = useAppSelector((state: RootState) => state.apiSettings)
     const { currency } = pageSettings.list;
     const [activeTab, setActiveTab] = useState<ActiveTab>('chart')
+    
     const coinIdComponents = {
         Header: <Header 
             name={coin.name}
@@ -45,6 +48,7 @@ function CoinIdPage({ coin }: CoinIdPageProps) {
             total_supply={coin.market_data.total_supply}
             max_supply={coin.market_data.max_supply}
             circulating_supply={coin.market_data.circulating_supply}
+            full_valuation={coin.market_data.fully_diluted_valuation[currency]}
             cur={'$'}
         />,
         Price: <Price
@@ -56,6 +60,7 @@ function CoinIdPage({ coin }: CoinIdPageProps) {
             btc={coin.market_data.current_price.btc}
             eth={coin.market_data.current_price.eth}
         />,
+        Markets: <Markets name={coin.name} tickers={tickers} />,
     }
     return (
         <StyledCoinIdPage>
@@ -63,7 +68,8 @@ function CoinIdPage({ coin }: CoinIdPageProps) {
             <div className="CoinIdPage">
                 {coinIdComponents.Header}
                 {coinIdComponents.Price}
-                {coinIdComponents.Stats}
+                {/* {coinIdComponents.Stats} */}
+                {coinIdComponents.Markets}
                 
             </div>
            
@@ -103,12 +109,17 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
     const { params } = context
     const coin = params!.coinId
-    const response = await fetch(`https://api.coingecko.com/api/v3/coins/${coin}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false`)
-    const data = await response.json()
+
+    const coinResponse = await fetch(`https://api.coingecko.com/api/v3/coins/${coin}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false`)
+    const coinData = await coinResponse.json()
+
+    const tickersResponse = await fetch(`https://api.coingecko.com/api/v3/coins/${coin}/tickers?include_exchange_logo=true`)
+    const tickersData = await tickersResponse.json()
 
     return {
         props: {
-            coin: data
+            coin: coinData,
+            tickers: tickersData
         }
     }
 }
