@@ -29,10 +29,10 @@ const Home: NextPage = () => {
 
     const dispatch = useAppDispatch();
 
-    const setPageNumber = (pageNumber: number): any => dispatch(changePageNumber(pageNumber))
-    const setCurrency = (currency: SupportedCurrencies): any => dispatch(changeCurrency(currency))
-    const setOrder = (order: ListApiOrder): any => dispatch(changeOrder(order))
-    const setPriceChange = (priceChange: ListApiPriceChange): any => dispatch(changePriceChange(priceChange))
+    const setPageNumber = (pageNumber: number) => dispatch(changePageNumber(pageNumber))
+    const setCurrency = (currency: SupportedCurrencies) => dispatch(changeCurrency(currency))
+    const setOrder = (order: ListApiOrder) => dispatch(changeOrder(order))
+    const setPriceChange = (priceChange: ListApiPriceChange) => dispatch(changePriceChange(priceChange))
 
     return (
         <StyledHome className="Home">

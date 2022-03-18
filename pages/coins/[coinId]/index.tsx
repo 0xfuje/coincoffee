@@ -6,7 +6,7 @@ import { CoinApiResult } from '../../../types'
 import styled from 'styled-components'
 import { useAppSelector } from '../../../app/hooks'
 import { RootState } from '../../../app/store'
-import {Price, Header, Description, Stats, Ticker} from '../../../components/coinId'
+import {Price, Header, Description, Stats, Performance, Links} from '../../../components/coinId'
 import Markets from '../../../components/coinId/Markets'
 
 interface CoinIdPageProps {
@@ -61,16 +61,37 @@ function CoinIdPage({ coin, tickers }: CoinIdPageProps) {
             eth={coin.market_data.current_price.eth}
         />,
         Markets: <Markets name={coin.name} tickers={tickers} />,
+        Description: <Description name={coin.name} text={coin.description.en}/>,
+        Perfomance: <Performance
+            p_24h={coin.market_data.price_change_percentage_24h} 
+            p_7d={coin.market_data.price_change_percentage_7d} 
+            p_30d={coin.market_data.price_change_percentage_30d} 
+            p_60d={coin.market_data.price_change_percentage_60d} 
+            p_200d={coin.market_data.price_change_percentage_200d} 
+            p_1y={coin.market_data.price_change_percentage_1y} 
+        />,
+        Links: <Links
+            homepage={coin.links.homepage[0]}
+            forum={coin.links.official_forum_url[0]}
+            explorer={coin.links.blockchain_site[0]}
+            twitter={coin.links.twitter_screen_name}
+            facebook={coin.links.facebook_username}
+            telegram={coin.links.telegram_channel_identifier}
+            reddit={coin.links.subreddit_url}
+            github={coin.links.repos_url.github[0]}
+        />
     }
     return (
         <StyledCoinIdPage>
             <Heading isSubTitleDisplayed={false}/>
             <div className="CoinIdPage">
                 {coinIdComponents.Header}
+                {coinIdComponents.Links}
                 {coinIdComponents.Price}
                 {/* {coinIdComponents.Stats} */}
-                {coinIdComponents.Markets}
-                
+                {/* {coinIdComponents.Markets} */}
+                {/* {coinIdComponents.Description} */}
+                {/* {coinIdComponents.Perfomance} */}
             </div>
            
         </StyledCoinIdPage>

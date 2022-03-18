@@ -59,6 +59,7 @@ const theme = {
         epsilon: '768px ',
         zeta: '600px',
         eta: '480px',
+        theta: '320px'
     },
     max_width: '1200px'
 }

@@ -39,7 +39,7 @@ function CoinList({ coins, priceChange }: CoinListProps) {
                 market_cap={c.market_cap}
                 total_volume={c.total_volume}
                 market_cap_rank={c.market_cap_rank}
-                price_change_percentage={priceChange().toFixed(1)}
+                price_change_percentage={priceChange()}
                 order={order}               
             />
         }) 

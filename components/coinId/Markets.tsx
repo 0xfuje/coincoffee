@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { TickerApiResult } from '../../types'
 import Ticker from './Ticker'
-
+import Button from '../Button'
 
 interface MarketsProps {
     name: string,
@@ -36,7 +36,9 @@ function Markets({name, tickers}: MarketsProps) {
                 </div>
             </div>
             {render5Tickers}
-            <button>Show All</button>
+            <div className="Markets-button">
+                <Button text="Show All" onClick={() => console.log('hi')}/>
+            </div>
         </StyledMarkets>
     )
 }
@@ -58,8 +60,12 @@ const StyledMarkets = styled.div`
                 padding-bottom: 3px;
                 border-bottom: 1px solid ${props => props.theme.color.epsilon};
             }
-            
-          
+        }
+        &-button {
+            margin-top: ${props => props.theme.space.epsilon};
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
     }
 `

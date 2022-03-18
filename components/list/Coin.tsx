@@ -1,22 +1,27 @@
 import React from 'react'
 import styled from 'styled-components';
-import { CoinProps } from '../../types';
+import { ListApiOrder } from '../../types';
 import Image from 'next/image'
 import Link from 'next/link';
-import { convertNum } from '../../helpers';
+import { convertNum, convertColor } from '../../helpers';
+export interface CoinProps {
+    id:                               string;
+    symbol:                           string;
+    name:                             string;
+    image:                            string;
+    current_price:                    number;
+    market_cap?:                      number;
+    total_volume?:                    number;
+    market_cap_rank:                  number;
+    price_change_percentage:          number;
+    order:                      ListApiOrder;
+}
 
 function Coin(props: CoinProps) {
     const order = (props.order === 'market_cap_desc')
         ? props.market_cap
         : props.total_volume
-    
-    const priceChange = (props.price_change_percentage === '0.0') ? '-' : `${props.price_change_percentage}%`
-    const priceChangeClass = () => {
-        const priceChange = parseInt(props.price_change_percentage)
-        if (priceChange > 0) return 'green';
-        if (priceChange < 0) return 'red';
-        if (priceChange === 0.0) return '';
-    }
+    const priceChange = (props.price_change_percentage === 0) ? '-' : `${props.price_change_percentage.toFixed(1)}%`
     return (
         <StyledCoin className='Coin'>
             <span className='Coin-rank'>{props.market_cap_rank}</span>
@@ -32,10 +37,10 @@ function Coin(props: CoinProps) {
                 </div>
             </div>
             <div className="Coin-priceParent">
-                <Link href={`/coins/${props.id}`}><a className='Coin-priceParent-price'>${props.current_price.toLocaleString()}</a></Link>
+                <Link href={`/coins/${props.id}`}><a className='Coin-priceParent-price'>${props.current_price}</a></Link>
                 <span className='Coin-priceParent-order'>${convertNum(order!)}</span>
             </div>
-            <div className={`Coin-priceChange ${priceChangeClass()}`}>{priceChange}</div>
+            <div className={`Coin-priceChange Coin-priceChange-${convertColor(props.price_change_percentage)}`}>{priceChange}</div>
             <div className='Coin-order'>${convertNum(order!)}</div>
         </StyledCoin>
     )
@@ -118,7 +123,12 @@ const StyledCoin = styled.div`
         }
 
         &-priceChange {
-            // font-weight: ${props => props.theme.font.weight.beta};;
+            &-green {
+                color: ${props => props.theme.color.omega};
+            }
+            &-red {
+                color: ${props => props.theme.color.psi};
+            }
         }
 
         &-order {

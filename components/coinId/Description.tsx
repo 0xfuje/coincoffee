@@ -1,27 +1,37 @@
 import React from 'react'
 import styled from 'styled-components'
+const HtmlToReactParser = require('html-to-react').Parser
 
 interface DescriptionProps {
     name: string,
-    description: string
+    text: string
 }
 
-function Description({name, description}: DescriptionProps) {
+function Description({name, text}: DescriptionProps) {
+    const htmlToReactParser = new HtmlToReactParser()
+    const description = htmlToReactParser.parse(text)
     return (
-            <StyledDescription className='Description'>
-                <h2 className='Description-title'>What is {name}?</h2>
-                <p className='Description-para'>{description}</p>
-            </StyledDescription>
-        )
+        <StyledDescription className='Description'>
+            <h2 className='Description-title'>What is {name}?</h2>
+            <p className='Description-text'>{description}</p>
+        </StyledDescription>
+    )
 }
 
 const StyledDescription = styled.div`
+    max-width: ${props => props.theme.breakpoint.zeta};
+
+    a {
+        font-weight: ${props => props.theme.font.weight.alpha};
+        &:hover {
+            text-decoration: underline;
+        }
+    }
     .Description {
         &-title {
             font-size: ${props => props.theme.font.size.alpha};
-        }
-        &-para {
-            max-width: 60ch;
+            font-weight: ${props => props.theme.font.weight.alpha};
+            margin-bottom: ${props => props.theme.space.theta};
         }
     }
 `

@@ -11,14 +11,14 @@ interface TickerProps {
     logo: string,
     volume: number,
     price: number,
-    trade_url: string
+    trade_url: string | null
 }
 
 function Ticker({base, target, exchange, logo, volume, price, trade_url}: TickerProps) {
     return (
         <StyledTicker className='Ticker'>
             <div className="Ticker-left">
-                <Link href={trade_url}>
+                <Link href={trade_url!}>
                 <a>
                     <Image 
                         className="Ticker-left-logo"
@@ -28,7 +28,7 @@ function Ticker({base, target, exchange, logo, volume, price, trade_url}: Ticker
                 </a>
                 </Link>
                 <div className="Ticker-left-text">
-                    <Link href={trade_url}>
+                    <Link href={trade_url!}>
                         <a className="Ticker-left-ticker">{base.slice(0,7)}/{target.slice(0, 7)}</a>
                     </Link>
                     <div className="Ticker-left-exchange">{exchange}</div>
