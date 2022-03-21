@@ -31,7 +31,6 @@ function Header({logo, name, market_cap_rank, symbol}: HeaderProps) {
 }
 
 const StyledHeader = styled.div`
-    margin-bottom: ${props => props.theme.space.epsilon};
     .Header {
         &-nav {
             font-size: ${props => props.theme.font.size.delta};

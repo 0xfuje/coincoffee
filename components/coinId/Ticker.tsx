@@ -36,7 +36,7 @@ function Ticker({base, target, exchange, logo, volume, price, trade_url}: Ticker
             </div>
             <div className="Ticker-right">
                 <div className="Ticker-right-volume">${volume.toLocaleString()}</div>    
-                <div className="Ticker-right-price">${price.toLocaleString()}</div>    
+                <div className="Ticker-right-price">${price}</div>    
             </div>
         </StyledTicker>
     )

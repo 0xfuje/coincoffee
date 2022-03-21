@@ -13,7 +13,7 @@ interface StyledLinkProps {
 
 function Link({size, href, children}: LinkProps) {
     return (
-        <StyledLink className='Link' size={size} href={href}>
+        <StyledLink className='Link' size={size} href={href} target='_blank'>
             {children}
         </StyledLink>
     )

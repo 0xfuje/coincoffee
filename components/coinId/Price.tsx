@@ -50,8 +50,7 @@ function Price({name, price, low_24h, high_24h, change_24h, btc, eth}: PriceProp
 }
 
 const StyledPrice = styled.div<StyledPriceProps>`
-    max-width: 320px;
-    margin-bottom: ${props => props.theme.space.beta};
+    max-width: ${props => props.theme.breakpoint.theta};
     .Price {
         &-name {
             color: ${props => props.theme.color.delta};

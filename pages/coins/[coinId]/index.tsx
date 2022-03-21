@@ -6,7 +6,7 @@ import { CoinApiResult } from '../../../types'
 import styled from 'styled-components'
 import { useAppSelector } from '../../../app/hooks'
 import { RootState } from '../../../app/store'
-import {Price, Header, Description, Stats, Performance, Links} from '../../../components/coinId'
+import {Price, Header, Description, Stats, Performance, Links, Chart} from '../../../components/coinId'
 import Markets from '../../../components/coinId/Markets'
 
 interface CoinIdPageProps {
@@ -20,7 +20,7 @@ type ActiveTab = 'chart' | 'markets' | 'price-stats' | 'description';
 
 function CoinIdPage({ coin, tickers }: CoinIdPageProps) {
     const pageSettings = useAppSelector((state: RootState) => state.apiSettings)
-    const { currency } = pageSettings.list;
+    const { currency } = pageSettings;
     const [activeTab, setActiveTab] = useState<ActiveTab>('chart')
     
     const coinIdComponents = {
@@ -79,6 +79,10 @@ function CoinIdPage({ coin, tickers }: CoinIdPageProps) {
             telegram={coin.links.telegram_channel_identifier}
             reddit={coin.links.subreddit_url}
             github={coin.links.repos_url.github[0]}
+        />,
+        Chart: <Chart
+            symbol={coin.id}
+            currency={currency}
         />
     }
     return (
@@ -88,10 +92,17 @@ function CoinIdPage({ coin, tickers }: CoinIdPageProps) {
                 {coinIdComponents.Header}
                 {coinIdComponents.Links}
                 {coinIdComponents.Price}
-                {/* {coinIdComponents.Stats} */}
-                {/* {coinIdComponents.Markets} */}
-                {/* {coinIdComponents.Description} */}
-                {/* {coinIdComponents.Perfomance} */}
+                {/* {coinIdComponents.Perfomance}
+                {coinIdComponents.Stats}
+                {coinIdComponents.Markets}
+                {coinIdComponents.Description} */}
+                {coinIdComponents.Chart}
+                <div className="CoinIdPage-tabs">
+                    <div className="CoinIdPage-tabs-chart"></div>
+                    <div className="CoinIdPage-tabs-chart"></div>
+                    <div className="CoinIdPage-tabs-chart"></div>
+                    <div className="CoinIdPage-tabs-chart"></div>
+                </div>
             </div>
            
         </StyledCoinIdPage>
@@ -100,10 +111,12 @@ function CoinIdPage({ coin, tickers }: CoinIdPageProps) {
 
 const StyledCoinIdPage = styled.div`
     .CoinIdPage {
-        margin: ${props => props.theme.space.eta};
-        &-tabs {
-            margin-top: ${props => props.theme.space.delta};
+        margin: ${props => props.theme.space.eta} auto;
+        max-width: ${props => props.theme.max_width};
+        & > * {
+            margin-bottom: ${props => props.theme.space.epsilon};
         }
+        
     }
 `
 
@@ -136,7 +149,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
     const tickersResponse = await fetch(`https://api.coingecko.com/api/v3/coins/${coin}/tickers?include_exchange_logo=true`)
     const tickersData = await tickersResponse.json()
-
     return {
         props: {
             coin: coinData,

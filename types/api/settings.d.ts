@@ -21,5 +21,6 @@ export interface ChartApiSettings {
 
 
 export interface ApiSettings {
-    list: ListApiSettings
+    currency: SupportedCurrencies
+    list: Omit<ListApiSettings, "currency">
 }

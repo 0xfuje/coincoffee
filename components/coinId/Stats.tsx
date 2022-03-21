@@ -36,25 +36,25 @@ function Stats({
         <ul className="Stats-list">
             <li className='Stats-list-item'>
                 <span className='Stats-list-item-description'>{name} price</span>
-                <span className='Stats-list-item-stat'>{cur}{price.toLocaleString()}</span>
+                <span className='Stats-list-item-stat'>{cur}{price}</span>
             </li>
             <li className='Stats-list-item'>
                 <span className='Stats-list-item-description'>Market cap</span>
-                <span className='Stats-list-item-stat'>{cur}{market_cap.toLocaleString()}</span>
+                <span className='Stats-list-item-stat'>{cur}{market_cap}</span>
             </li>
             {full_valuation ? 
                 <li className='Stats-list-item'>
                     <span className='Stats-list-item-description'>Fully diluted valuation</span>
-                    <span className='Stats-list-item-stat'>{cur}{full_valuation.toLocaleString()}</span>
+                    <span className='Stats-list-item-stat'>{cur}{full_valuation}</span>
                 </li>
             : ''}
             <li className='Stats-list-item'>
                 <span className='Stats-list-item-description'>Volume</span>
-                <span className='Stats-list-item-stat'>{cur}{volume.toLocaleString()}</span>
+                <span className='Stats-list-item-stat'>{cur}{volume}</span>
             </li>
             <li className='Stats-list-item'>
                 <span className='Stats-list-item-description'>24H low / 24H high</span>
-                <span className='Stats-list-item-stat'>{cur}{low_24h.toLocaleString()} / {cur}{high_24h.toLocaleString()}</span>
+                <span className='Stats-list-item-stat'>{cur}{low_24h} / {cur}{high_24h}</span>
             </li>
             <li className='Stats-list-item'>
                 <span className='Stats-list-item-description'>Market cap rank</span>
@@ -66,7 +66,7 @@ function Stats({
                 </span>
                 <div className="Stats-list-item-ath-flex">
                     <div className='Stats-list-item-ath-div'>
-                        <span className='Stats-list-item-ath-stat'>{cur}{ath.toLocaleString()} </span>
+                        <span className='Stats-list-item-ath-stat'>{cur}{ath} </span>
                         <span className='Stats-list-item-ath-percentage'>{ath_change_percentage.toFixed(1)}%</span>
                     </div>
                     <span className='Stats-list-item-ath-date'>

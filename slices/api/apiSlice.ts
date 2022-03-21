@@ -28,7 +28,7 @@ const apiSlice = createApi({
         getTickers: builder.query<TickerApiResult[], string>({
             query: (coin) => `/coins/${coin}/tickers?include_exchange_logo=true`
         }),
-        getChart: builder.query<ChartApiResult[], ChartApiSettings>({
+        getChart: builder.query<ChartApiResult, ChartApiSettings>({
             query: (args) => {
                 const {coin, currency, days} = args;
                 return `/coins/${coin}/market_chart?vs_currency=${currency}&days=${days}`

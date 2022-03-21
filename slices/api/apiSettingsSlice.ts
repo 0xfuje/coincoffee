@@ -2,12 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { ListApiSettings, SupportedCurrencies, ListApiOrder, ListApiPriceChange, ApiSettings } from '../../types'
 
 const initialState: ApiSettings = {
+    currency: 'usd',
     list: {
         pageNumber: 1,
-        currency: 'usd',
         order: 'market_cap_desc',
         priceChange: '1y'
-    }
+    },
 }
 
 const apiSettingsSlice = createSlice({
@@ -21,7 +21,7 @@ const apiSettingsSlice = createSlice({
             state.list = action.payload
         },
         changeCurrency(state, action: PayloadAction<SupportedCurrencies>) {
-            state.list.currency = action.payload
+            state.currency = action.payload
         },
         changeOrder(state, action: PayloadAction<ListApiOrder>) {
             state.list.order = action.payload

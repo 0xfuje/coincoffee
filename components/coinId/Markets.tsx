@@ -48,7 +48,7 @@ const StyledMarkets = styled.div`
     .Markets {
         &-header {
             &-title {
-                font-size: ${props => props.theme.font.size.beta};
+                font-size: ${props => props.theme.font.size.alpha};
                 font-weight: ${props => props.theme.font.weight.alpha};
                 margin-bottom: ${props => props.theme.space.eta};
             }

@@ -14,12 +14,8 @@ import Heading from '../components/Heading'
 
 const Home: NextPage = () => {
     const pageSettings = useAppSelector((state: RootState) => state.apiSettings)
-    const { 
-        currency,
-        order,
-        pageNumber,
-        priceChange
-    } = pageSettings.list;
+    const { currency, list } = pageSettings;
+    const { order, pageNumber, priceChange } = list;
     
     const {
         data: coins,

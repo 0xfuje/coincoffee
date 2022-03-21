@@ -63,8 +63,8 @@ function CoinList({ coins, priceChange }: CoinListProps) {
 const StyledCoinList = styled.div`
     display: block;
     width: 100%;
-    margin: ${props => props.theme.space.eta};
-
+    margin: ${props => props.theme.space.eta} auto 0;
+    max-width: ${props => props.theme.max_width};
     .CoinList {
         &-header {
             display: grid;
@@ -73,8 +73,7 @@ const StyledCoinList = styled.div`
             text-transform: uppercase;
             padding-bottom: 3px;
             border-bottom: 1px solid ${props => props.theme.color.epsilon};
-            margin: 0 auto;
-            max-width: ${props => props.theme.max_width};
+            
             @media screen and (min-width: ${props => props.theme.breakpoint.zeta}) {
                 grid-template-columns: 3fr 1fr 1fr 1fr;
             };
@@ -99,8 +98,7 @@ const StyledCoinList = styled.div`
         &-body {
             display: grid;
             grid-auto-rows: 4em;
-            margin: 0 auto;
-            max-width: ${props => props.theme.max_width};
+            
         }
     }
 `
