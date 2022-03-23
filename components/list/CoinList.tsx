@@ -15,7 +15,7 @@ function CoinList({ coins, priceChange }: CoinListProps) {
 
     const pageSettings = useAppSelector((state: RootState) => state.apiSettings)
     const { order } = pageSettings.list;
-    
+    const { symbol } = pageSettings.currency
 
     const renderCoins = coins?.map((c: ListApiResult) => {
             const priceChange = () => {
@@ -40,7 +40,8 @@ function CoinList({ coins, priceChange }: CoinListProps) {
                 total_volume={c.total_volume}
                 market_cap_rank={c.market_cap_rank}
                 price_change_percentage={priceChange()}
-                order={order}               
+                order={order}
+                currencySymbol={symbol}               
             />
         }) 
     return (

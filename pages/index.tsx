@@ -14,19 +14,19 @@ import Heading from '../components/Heading'
 
 const Home: NextPage = () => {
     const pageSettings = useAppSelector((state: RootState) => state.apiSettings)
-    const { currency, list } = pageSettings;
-    const { order, pageNumber, priceChange } = list;
-    
+    const { currency, list } = pageSettings
+    const { order, pageNumber, priceChange } = list
+    const currencyName = currency.name
     const {
         data: coins,
         isFetching: isCoinsFetching,
         isSuccess: isCoinsSuccess
-    } = useGetListQuery({currency, order, pageNumber, priceChange})
+    } = useGetListQuery({currency: currencyName, order, pageNumber, priceChange})
 
     const dispatch = useAppDispatch();
 
     const setPageNumber = (pageNumber: number) => dispatch(changePageNumber(pageNumber))
-    const setCurrency = (currency: SupportedCurrencies) => dispatch(changeCurrency(currency))
+    const setCurrency = (currency: SupportedCurrencies) => dispatch(changeCurrency(currencyName))
     const setOrder = (order: ListApiOrder) => dispatch(changeOrder(order))
     const setPriceChange = (priceChange: ListApiPriceChange) => dispatch(changePriceChange(priceChange))
 
@@ -39,7 +39,7 @@ const Home: NextPage = () => {
             </Head>
             <Heading isSubTitleDisplayed={true} />
             <PageSettings
-                setCurrency={setCurrency} currency={currency}
+                setCurrency={setCurrency} currency={currencyName}
                 setOrder={setOrder} order={order}
                 setPriceChange={setPriceChange} priceChange={priceChange}
             />

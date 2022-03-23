@@ -21,6 +21,7 @@ type ActiveTab = 'chart' | 'markets' | 'price-stats' | 'description';
 function CoinIdPage({ coin, tickers }: CoinIdPageProps) {
     const pageSettings = useAppSelector((state: RootState) => state.apiSettings)
     const { currency } = pageSettings;
+    const currencyName = currency.name
     const [activeTab, setActiveTab] = useState<ActiveTab>('chart')
     
     const coinIdComponents = {
@@ -33,29 +34,29 @@ function CoinIdPage({ coin, tickers }: CoinIdPageProps) {
         Stats: <Stats
             name={coin.name}
             symbol={coin.symbol}
-            price={coin.market_data.current_price[currency]}
-            market_cap={coin.market_data.market_cap[currency]}
-            volume={coin.market_data.total_volume[currency]}
-            low_24h={coin.market_data.low_24h[currency]}
-            high_24h={coin.market_data.high_24h[currency]}
+            price={coin.market_data.current_price[currencyName]}
+            market_cap={coin.market_data.market_cap[currencyName]}
+            volume={coin.market_data.total_volume[currencyName]}
+            low_24h={coin.market_data.low_24h[currencyName]}
+            high_24h={coin.market_data.high_24h[currencyName]}
             market_cap_rank={coin.market_cap_rank}
-            ath={coin.market_data.ath[currency]}
-            ath_change_percentage={coin.market_data.ath_change_percentage[currency]}
-            ath_date={coin.market_data.ath_date[currency].slice(0, -14)}
-            atl={coin.market_data.atl[currency]}
-            atl_change_percentage={coin.market_data.atl_change_percentage[currency]}
-            atl_date={coin.market_data.atl_date[currency].slice(0, -14)}
+            ath={coin.market_data.ath[currencyName]}
+            ath_change_percentage={coin.market_data.ath_change_percentage[currencyName]}
+            ath_date={coin.market_data.ath_date[currencyName].slice(0, -14)}
+            atl={coin.market_data.atl[currencyName]}
+            atl_change_percentage={coin.market_data.atl_change_percentage[currencyName]}
+            atl_date={coin.market_data.atl_date[currencyName].slice(0, -14)}
             total_supply={coin.market_data.total_supply}
             max_supply={coin.market_data.max_supply}
             circulating_supply={coin.market_data.circulating_supply}
-            full_valuation={coin.market_data.fully_diluted_valuation[currency]}
+            full_valuation={coin.market_data.fully_diluted_valuation[currencyName]}
             cur={'$'}
         />,
         Price: <Price
             name={coin.name}
-            price={coin.market_data.current_price[currency]}
-            low_24h={coin.market_data.low_24h[currency]}
-            high_24h={coin.market_data.high_24h[currency]}
+            price={coin.market_data.current_price[currencyName]}
+            low_24h={coin.market_data.low_24h[currencyName]}
+            high_24h={coin.market_data.high_24h[currencyName]}
             change_24h={coin.market_data.price_change_percentage_24h}
             btc={coin.market_data.current_price.btc}
             eth={coin.market_data.current_price.eth}
@@ -82,7 +83,7 @@ function CoinIdPage({ coin, tickers }: CoinIdPageProps) {
         />,
         Chart: <Chart
             symbol={coin.id}
-            currency={currency}
+            currency={currencyName}
         />
     }
     return (

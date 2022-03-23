@@ -2,7 +2,10 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { ListApiSettings, SupportedCurrencies, ListApiOrder, ListApiPriceChange, ApiSettings } from '../../types'
 
 const initialState: ApiSettings = {
-    currency: 'usd',
+    currency: {
+        name: 'usd',
+        symbol: '$'
+    },
     list: {
         pageNumber: 1,
         order: 'market_cap_desc',
@@ -21,7 +24,15 @@ const apiSettingsSlice = createSlice({
             state.list = action.payload
         },
         changeCurrency(state, action: PayloadAction<SupportedCurrencies>) {
-            state.currency = action.payload
+            if (action.payload === 'usd') state.currency.symbol = '$'
+            if (action.payload === 'eur') state.currency.symbol = '€'
+            if (action.payload === 'chf') state.currency.symbol = 'CHF'
+            if (action.payload === 'cny') state.currency.symbol = '¥'        
+            if (action.payload === 'jpy') state.currency.symbol = '¥'        
+            if (action.payload === 'gbp') state.currency.symbol = '£'        
+            if (action.payload === 'eth') state.currency.symbol = 'Ξ'
+            if (action.payload === 'btc') state.currency.symbol = '₿'
+            state.currency.name = action.payload;
         },
         changeOrder(state, action: PayloadAction<ListApiOrder>) {
             state.list.order = action.payload

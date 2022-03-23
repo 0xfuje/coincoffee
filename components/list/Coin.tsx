@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
-import { ListApiOrder } from '../../types';
+import { ListApiOrder, SupportedSymbols } from '../../types';
 import Image from 'next/image'
 import Link from 'next/link';
 import { convertNum, convertColor } from '../../helpers';
@@ -15,9 +15,11 @@ export interface CoinProps {
     market_cap_rank:                  number;
     price_change_percentage:          number;
     order:                      ListApiOrder;
+    currencySymbol:         SupportedSymbols;
 }
 
 function Coin(props: CoinProps) {
+    const cs = props.currencySymbol
     const order = (props.order === 'market_cap_desc')
         ? props.market_cap
         : props.total_volume
@@ -37,11 +39,11 @@ function Coin(props: CoinProps) {
                 </div>
             </div>
             <div className="Coin-priceParent">
-                <Link href={`/coins/${props.id}`}><a className='Coin-priceParent-price'>${props.current_price}</a></Link>
-                <span className='Coin-priceParent-order'>${convertNum(order!)}</span>
+                <Link href={`/coins/${props.id}`}><a className='Coin-priceParent-price'>{cs}{props.current_price}</a></Link>
+                <span className='Coin-priceParent-order'>{cs}{convertNum(order!)}</span>
             </div>
             <div className={`Coin-priceChange Coin-priceChange-${convertColor(props.price_change_percentage)}`}>{priceChange}</div>
-            <div className='Coin-order'>${convertNum(order!)}</div>
+            <div className='Coin-order'>{cs}{convertNum(order!)}</div>
         </StyledCoin>
     )
 }
