@@ -13,6 +13,7 @@ import {
     LineElement,
     Title,
     Tooltip,
+    LineController,
     Legend
 } from 'chart.js'
 import { useState } from "react"
@@ -24,16 +25,16 @@ ChartJS.register(
     PointElement,
     LineElement,
     Title,
-    Tooltip,
+    LineController,
     Legend
 )
 
 interface ChartProps {
     symbol: string,
-    currency: SupportedCurrencies
+    id: string
 }
 
-function Chart({symbol}: ChartProps) {
+function Chart({symbol, id}: ChartProps) {
     const [days, setDays] = useState<number>(100)
     const pageSettings = useAppSelector((state: RootState) => state.apiSettings)
     const { currency } = pageSettings
@@ -41,37 +42,71 @@ function Chart({symbol}: ChartProps) {
         data: rawChartData,
         isFetching,
         isSuccess
-    } = useGetChartQuery({coin: symbol, currency: currency.name, days})
+    } = useGetChartQuery({coin: id, currency: currency.name, days})
     
-    console.log(rawChartData)
+    // Custom chart from controller
+    
 
-    const pricesTime = rawChartData?.prices.map((c) => {
+    const times = rawChartData?.prices.map((c) => {
         const iso = new Date(c[0]).toISOString()
         const dt = DateTime.fromISO(iso)
         const format = dt.toLocaleString()
         return format;
     })
-    console.log(pricesTime)
+    const values = rawChartData?.prices.map((c) => `${c[1]}`);
+    console.log(times, values)
 
     const data = {
-        labels: ['hey', 'iam', 'feeling', 'shit', 'like', 'no'],
+        labels: times,
         datasets: [{
-            label: 'My First Dataset',
-            data: [65, 59, 80, 81, 56, 62, 40],
-            fill: false,
-            borderColor: '#000000',
-            tension: 0.1
-        }]
+            data: values,
+            borderColor: '#50433D',
+            borderWidth: 2,
+            tension: 0.2,
+            pointRadius: 0,
+        }],
+    }
+    const options = {
+        plugins: {
+            legend: {
+                display: false
+            }
+        },
+        responsive: true,
+        scales: {
+            y: {
+                ticks: {
+                    callback: function(value: any, index: any, ticks: any) {
+                        return '$' + value
+                    }
+                },
+            },
+            x: {
+                ticks: {
+                   maxTicksLimit: 20,
+                },
+                grid: {
+                    display: false
+                }
+            }
+        }
     }
     return (
             <StyledChart className='Chart'>
-                <Line data={data} />
+                <h2 className="Chart-title">{symbol.toUpperCase()} Price Chart</h2>
+                <Line data={data} options={options} />
             </StyledChart>
     )
 }
 
 const StyledChart = styled.div`
-
+    .Chart {
+        &-title {
+            font-size: ${props => props.theme.font.size.beta};
+            font-weight: ${props => props.theme.font.weight.alpha};
+            margin-bottom: ${props => props.theme.space.eta};
+        }
+    }
 `
 
 export default Chart

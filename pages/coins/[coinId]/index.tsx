@@ -83,8 +83,8 @@ function CoinIdPage({ coin, tickers }: CoinIdPageProps) {
             github={coin.links.repos_url.github[0]}
         />,
         Chart: <Chart
-            symbol={coin.id}
-            currency={currencyName}
+            symbol={coin.symbol}
+            id={coin.id}
         />
     }
     return (
