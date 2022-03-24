@@ -26,7 +26,7 @@ const Home: NextPage = () => {
     const dispatch = useAppDispatch();
 
     const setPageNumber = (pageNumber: number) => dispatch(changePageNumber(pageNumber))
-    const setCurrency = (currency: SupportedCurrencies) => dispatch(changeCurrency(currencyName))
+    const setCurrency = (currencyName: SupportedCurrencies) => dispatch(changeCurrency(currencyName))
     const setOrder = (order: ListApiOrder) => dispatch(changeOrder(order))
     const setPriceChange = (priceChange: ListApiPriceChange) => dispatch(changePriceChange(priceChange))
 

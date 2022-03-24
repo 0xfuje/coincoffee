@@ -16,7 +16,8 @@ function PageNavigation({ pageNumber, setPageNumber }: PageNavProps ) {
     return (
         <StyledPageNavigation className='PageNavigation'>
             <button className='button' disabled={(pageNumber <= 1)} onClick={() => setPageNumber(pageNumber - 1)}>‹&nbsp;Prev</button>
-            {(pageNumber > 2) ? <button className='button' onClick={() => setPageNumber(pageNumber - 2)}>{pageNumber - 2}</button> : ''} 
+            {(pageNumber > 2) ? <button className='button' onClick={() => setPageNumber(1)}>1</button> : ''} 
+            {(pageNumber > 3) ? <button className='button' onClick={() => setPageNumber(pageNumber - 2)}>{pageNumber - 2}</button> : ''} 
             {(pageNumber > 1) ? <button className='button' onClick={() => setPageNumber(pageNumber - 1)}>{pageNumber - 1}</button> : ''} 
             <button className='button button-selected' onClick={() => setPageNumber(pageNumber)}>{pageNumber}</button>
             <button className='button' onClick={() => setPageNumber(pageNumber + 1)}>{pageNumber + 1}</button>
