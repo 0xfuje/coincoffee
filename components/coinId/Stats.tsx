@@ -19,14 +19,14 @@ interface StatsProps {
     circulating_supply: number,
     total_supply?: null | number,
     max_supply?: null | number
-    cur: string,
+    currency: string,
     full_valuation: number
 }
 
 
 
 function Stats({
-    cur, name, symbol, price, market_cap, volume, low_24h, high_24h,
+    currency, name, symbol, price, market_cap, volume, low_24h, high_24h,
     market_cap_rank, ath, ath_date, ath_change_percentage, atl, atl_date,
     atl_change_percentage, circulating_supply, total_supply, max_supply, full_valuation
 }: StatsProps) {
@@ -36,25 +36,25 @@ function Stats({
         <ul className="Stats-list">
             <li className='Stats-list-item'>
                 <span className='Stats-list-item-description'>{name} price</span>
-                <span className='Stats-list-item-stat'>{cur}{price}</span>
+                <span className='Stats-list-item-stat'>{currency}{price}</span>
             </li>
             <li className='Stats-list-item'>
                 <span className='Stats-list-item-description'>Market cap</span>
-                <span className='Stats-list-item-stat'>{cur}{market_cap}</span>
+                <span className='Stats-list-item-stat'>{currency}{market_cap}</span>
             </li>
             {full_valuation ? 
                 <li className='Stats-list-item'>
                     <span className='Stats-list-item-description'>Fully diluted valuation</span>
-                    <span className='Stats-list-item-stat'>{cur}{full_valuation}</span>
+                    <span className='Stats-list-item-stat'>{currency}{full_valuation}</span>
                 </li>
             : ''}
             <li className='Stats-list-item'>
                 <span className='Stats-list-item-description'>Volume</span>
-                <span className='Stats-list-item-stat'>{cur}{volume}</span>
+                <span className='Stats-list-item-stat'>{currency}{volume}</span>
             </li>
             <li className='Stats-list-item'>
                 <span className='Stats-list-item-description'>24H low / 24H high</span>
-                <span className='Stats-list-item-stat'>{cur}{low_24h} / {cur}{high_24h}</span>
+                <span className='Stats-list-item-stat'>{currency}{low_24h} / {currency}{high_24h}</span>
             </li>
             <li className='Stats-list-item'>
                 <span className='Stats-list-item-description'>Market cap rank</span>
@@ -66,7 +66,7 @@ function Stats({
                 </span>
                 <div className="Stats-list-item-ath-flex">
                     <div className='Stats-list-item-ath-div'>
-                        <span className='Stats-list-item-ath-stat'>{cur}{ath} </span>
+                        <span className='Stats-list-item-ath-stat'>{currency}{ath} </span>
                         <span className='Stats-list-item-ath-percentage'>{ath_change_percentage.toFixed(1)}%</span>
                     </div>
                     <span className='Stats-list-item-ath-date'>
@@ -80,7 +80,7 @@ function Stats({
                 </span>
                 <div className="Stats-list-item-atl-flex">
                     <span className='Stats-list-item-atl-div'>
-                        <span className='Stats-list-item-atl-stat'>{cur}{atl.toLocaleString()} </span>
+                        <span className='Stats-list-item-atl-stat'>{currency}{atl} </span>
                         <span className='Stats-list-item-atl-percentage'>+{atl_change_percentage.toFixed(1)}%</span>
                     </span>
                     <span className='Stats-list-item-atl-date'>

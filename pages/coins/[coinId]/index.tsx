@@ -50,7 +50,7 @@ function CoinIdPage({ coin, tickers }: CoinIdPageProps) {
             max_supply={coin.market_data.max_supply}
             circulating_supply={coin.market_data.circulating_supply}
             full_valuation={coin.market_data.fully_diluted_valuation[currencyName]}
-            cur={'$'}
+            currency={currency.symbol}
         />,
         Price: <Price
             name={coin.name}
@@ -60,6 +60,7 @@ function CoinIdPage({ coin, tickers }: CoinIdPageProps) {
             change_24h={coin.market_data.price_change_percentage_24h}
             btc={coin.market_data.current_price.btc}
             eth={coin.market_data.current_price.eth}
+            currency={currency.symbol}
         />,
         Markets: <Markets name={coin.name} tickers={tickers} />,
         Description: <Description name={coin.name} text={coin.description.en}/>,
@@ -92,12 +93,12 @@ function CoinIdPage({ coin, tickers }: CoinIdPageProps) {
             <div className="CoinIdPage">
                 {coinIdComponents.Header}
                 {coinIdComponents.Links}
-                {coinIdComponents.Price}
-                {/* {coinIdComponents.Perfomance}
+{/*                 {coinIdComponents.Price}
+                {coinIdComponents.Perfomance}
                 {coinIdComponents.Stats}
                 {coinIdComponents.Markets}
-                {coinIdComponents.Description} */}
-                {coinIdComponents.Chart}
+                {coinIdComponents.Description}
+                {coinIdComponents.Chart} */}
                 <div className="CoinIdPage-tabs">
                     <div className="CoinIdPage-tabs-chart"></div>
                     <div className="CoinIdPage-tabs-chart"></div>

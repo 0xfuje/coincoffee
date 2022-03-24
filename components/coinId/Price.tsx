@@ -8,14 +8,15 @@ interface PriceProps {
     high_24h: number,
     change_24h: number,
     btc: number,
-    eth: number
+    eth: number,
+    currency: string,
 }
 interface StyledPriceProps {
     readonly isPriceChangePos: boolean
 }
 
 
-function Price({name, price, low_24h, high_24h, change_24h, btc, eth}: PriceProps) {
+function Price({name, price, low_24h, high_24h, change_24h, btc, eth, currency}: PriceProps) {
     const isPriceChangePos: boolean = (change_24h >= 0) ? true : false
     const change_24h_perc = (change_24h).toFixed(1)
     const change_24h_prefix = isPriceChangePos ? '+' : ''
@@ -24,7 +25,7 @@ function Price({name, price, low_24h, high_24h, change_24h, btc, eth}: PriceProp
             <p className='Price-name'>{name} Price</p>
             <div className="Price-row">
                 <div className="Price-price">
-                    <h2 className="Price-price-current">${price}</h2>
+                    <h2 className="Price-price-current">{currency}{price}</h2>
                     <span className='Price-price-change'>{change_24h_prefix}{change_24h_perc}%</span>
                 </div>
                 <div className="Price-crypto">
@@ -37,12 +38,12 @@ function Price({name, price, low_24h, high_24h, change_24h, btc, eth}: PriceProp
             <div className="Price-bar">
                 <div className='Price-bar-low'>
                     <span className='Price-bar-text'>Low:</span>
-                    <span className='Price-bar-price'>${low_24h}</span>
+                    <span className='Price-bar-price'>{currency}{low_24h}</span>
                 </div>
                 <div className="Price-bar-line"></div>
                 <div className='Price-bar-high'>
                     <span className='Price-bar-text'>High:</span>
-                    <span className='Price-bar-price'>${high_24h}</span>
+                    <span className='Price-bar-price'>{currency}{high_24h}</span>
                 </div>    
             </div>
         </StyledPrice>

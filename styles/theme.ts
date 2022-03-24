@@ -37,6 +37,7 @@ const theme = {
         epsilon: '#D1C9C7',
         zeta: '#EBE7E5',
         eta: '#F3F2F1',
+        theta: '#FAFAFA',
         omega: '#16C784',   // green
         psi: '#EA3943'      // red
     },
