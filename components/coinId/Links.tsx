@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Link from '../Link'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHouse, faUsers, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { faGithub, faFacebook, faTelegram, faReddit, faTwitter } from '@fortawesome/free-brands-svg-icons'
 
@@ -32,7 +32,7 @@ function Links({homepage, forum, explorer, twitter, facebook, reddit, telegram, 
             <Link href={homepage} size={'big'}><FontAwesomeIcon icon={faHouse}/>Homepage</Link>
             <Link href={explorer} size={'big'}><FontAwesomeIcon icon={faMagnifyingGlass}/>Explorer</Link>
             <div className="Links-social">
-                <Link href={`/`} size={'big'}><FontAwesomeIcon icon={faUsers}/>Socials</Link>
+                <Link href={homepage} size={'big'}><FontAwesomeIcon icon={faUsers}/>Socials</Link>
                 {socialLinks}
             </div>
             {github ? <Link href={github} size={'big'}><FontAwesomeIcon icon={faGithub}/>Github</Link> : ''}
@@ -53,10 +53,8 @@ const StyledLinks = styled.div`
                 }
             }
             &-links {
-                
                 display: none;
-                display: flex;
-                top: 2em;
+                top: 1.25em;
                 left: -0.75em;
                 position: absolute;
                 gap: ${props => props.theme.space.eta};

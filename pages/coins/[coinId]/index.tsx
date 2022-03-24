@@ -93,12 +93,12 @@ function CoinIdPage({ coin, tickers }: CoinIdPageProps) {
             <div className="CoinIdPage">
                 {coinIdComponents.Header}
                 {coinIdComponents.Links}
-{/*                 {coinIdComponents.Price}
-                {coinIdComponents.Perfomance}
+                {coinIdComponents.Price}
+                {/* {coinIdComponents.Perfomance}
                 {coinIdComponents.Stats}
                 {coinIdComponents.Markets}
-                {coinIdComponents.Description}
-                {coinIdComponents.Chart} */}
+                {coinIdComponents.Description} */}
+                {coinIdComponents.Chart}
                 <div className="CoinIdPage-tabs">
                     <div className="CoinIdPage-tabs-chart"></div>
                     <div className="CoinIdPage-tabs-chart"></div>

@@ -2,6 +2,9 @@ import styled from 'styled-components'
 import React from 'react'
 import { ListApiOrder, ListApiPriceChange, SupportedCurrencies } from '../types'
 
+
+
+
 export interface PageSettingsProps {
     setCurrency: (currency: SupportedCurrencies) => any
     setOrder: (order: ListApiOrder) => any
@@ -30,14 +33,13 @@ function PageSettings(
                 onChange={(e) => setCurrency(e.target.value as SupportedCurrencies)}
                 value={currency}
             >
-                <option value="usd">USD</option>
-                <option value="eur">EUR</option>
-                <option value="chf">CHF</option>
-                <option value="cny">CNY</option>
-                <option value="jpy">JPY</option>
-                <option value="gbp">GBP</option>
-                <option value="btc">BTC</option>
-                <option value="eth">ETH</option>
+                <option value="usd">USD - $</option>
+                <option value="eur">EUR - €</option>
+                <option value="gbp">GBP - £</option>
+                <option value="cny">CNY - ¥</option>
+                <option value="jpy">JPY - ¥</option>
+                <option value="btc">BTC - ₿</option>
+                <option value="eth">ETH - Ξ</option>
             </select>
             
         </div>
@@ -86,7 +88,6 @@ const StyledPageSettings = styled.div`
     gap: ${props => props.theme.space.epsilon};
 
     option {
-        padding: ${props => props.theme.space.theta} ${props => props.theme.space.zeta};
         border-radius: ${props => props.theme.space.theta};
         background-color: ${props => props.theme.color.epsilon};
         cursor: pointer;
@@ -102,6 +103,9 @@ const StyledPageSettings = styled.div`
             background-color: ${props => props.theme.color.epsilon};
             cursor: pointer;
             align-items: center;
+            &-timeframe {
+                text-transform: uppercase;
+            }
             &::after {
                 grid-area: select;
                 content: "";

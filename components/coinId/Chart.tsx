@@ -3,6 +3,7 @@ import { Line } from 'react-chartjs-2'
 import { useAppSelector } from "../../app/hooks"
 import { RootState } from "../../app/store"
 import { useGetChartQuery } from "../../slices/api/apiSlice"
+import { DateTime } from 'luxon'
 import { SupportedCurrencies } from "../../types"
 import {
     Chart as ChartJS,
@@ -40,12 +41,15 @@ function Chart({symbol}: ChartProps) {
         data: rawChartData,
         isFetching,
         isSuccess
-    } = useGetChartQuery({coin: symbol, currency, days})
+    } = useGetChartQuery({coin: symbol, currency: currency.name, days})
     
     console.log(rawChartData)
 
     const pricesTime = rawChartData?.prices.map((c) => {
-        return new Date(c[0])
+        const iso = new Date(c[0]).toISOString()
+        const dt = DateTime.fromISO(iso)
+        const format = dt.toLocaleString()
+        return format;
     })
     console.log(pricesTime)
 

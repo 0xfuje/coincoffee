@@ -26,7 +26,6 @@ const apiSettingsSlice = createSlice({
         changeCurrency(state, action: PayloadAction<SupportedCurrencies>) {
             if (action.payload === 'usd') state.currency.symbol = '$'
             if (action.payload === 'eur') state.currency.symbol = '€'
-            if (action.payload === 'chf') state.currency.symbol = 'CHF'
             if (action.payload === 'cny') state.currency.symbol = '¥'        
             if (action.payload === 'jpy') state.currency.symbol = '¥'        
             if (action.payload === 'gbp') state.currency.symbol = '£'        
