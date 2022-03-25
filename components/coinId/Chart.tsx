@@ -14,19 +14,22 @@ import {
     Title,
     Tooltip,
     LineController,
-    Legend
-} from 'chart.js'
+    Interaction,
+    Legend} from 'chart.js'
+import  CrosshairPlugin, { Interpolate } from 'chartjs-plugin-crosshair'
 import { useState } from "react"
-
+Interaction.modes.interpolate = Interpolate
 
 ChartJS.register(
     CategoryScale,
     LinearScale,
     PointElement,
     LineElement,
+    Tooltip,
     Title,
     LineController,
-    Legend
+    Legend,
+    CrosshairPlugin
 )
 
 interface ChartProps {
@@ -35,7 +38,7 @@ interface ChartProps {
 }
 
 function Chart({symbol, id}: ChartProps) {
-    const [days, setDays] = useState<number>(100)
+    const [days, setDays] = useState<number>(90)
     const pageSettings = useAppSelector((state: RootState) => state.apiSettings)
     const { currency } = pageSettings
     const { 
@@ -59,15 +62,41 @@ function Chart({symbol, id}: ChartProps) {
     const data = {
         labels: times,
         datasets: [{
+
             data: values,
             borderColor: '#50433D',
             borderWidth: 2,
-            tension: 0.2,
+            tension: 0.1,
             pointRadius: 0,
+            pointHoverRadius: 0,
+            pointHitRadius: 0.1
         }],
     }
     const options = {
         plugins: {
+            tooltip: {
+                mode: 'index',
+                intersect: false,
+            },
+            crosshair: {
+                line: {
+                  color: '50433D',  // crosshair line color
+                  width: 1,        // crosshair line width
+                  dashPattern: [5, 5]
+                },
+                sync: {
+                    enabled: true
+                },
+                zoom: {
+                    enabled: false,
+                },
+                snap: {
+                    enabled: true
+                }
+            },
+            hover: {
+                intersect: false
+            },
             legend: {
                 display: false
             }
