@@ -17,7 +17,6 @@ interface LinksProps {
 }
 
 function Links({homepage, forum, explorer, twitter, facebook, reddit, telegram, github}: LinksProps) {
-    console.log(homepage, forum, explorer, twitter, facebook, reddit, telegram, github)
     const socialLinks = 
     <div className='Links-social-links'>
         {forum ? <Link href={forum} size={'big'}><FontAwesomeIcon icon={faUsers}/>Forum</Link> : ''}

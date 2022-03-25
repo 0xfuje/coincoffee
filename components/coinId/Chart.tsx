@@ -15,7 +15,9 @@ import {
     Tooltip,
     LineController,
     Interaction,
-    Legend} from 'chart.js'
+    Legend,
+    LogarithmicScale
+} from 'chart.js'
 import  CrosshairPlugin, { Interpolate } from 'chartjs-plugin-crosshair'
 import { useState } from "react"
 Interaction.modes.interpolate = Interpolate
@@ -29,16 +31,26 @@ ChartJS.register(
     Title,
     LineController,
     Legend,
-    CrosshairPlugin
+    CrosshairPlugin,
+    LogarithmicScale
 )
 
 interface ChartProps {
     symbol: string,
     id: string
 }
+type Days = 1 | 7 | 30 | 90 | 180 | 365
+type ChartType = 'logarithmic' | 'linear'
+type DataType = 'price' | 'volume' | 'market_cap'
 
 function Chart({symbol, id}: ChartProps) {
-    const [days, setDays] = useState<number>(90)
+    const [days, setDays] = useState<Days>(90)
+    const [chartType, setChartType] = useState<ChartType>('linear')
+    const [dataType, setDataType] = useState<DataType>('price')
+
+    const [labels, setLabels] = useState()
+    const [dataset, setDataset] = useState()
+
     const pageSettings = useAppSelector((state: RootState) => state.apiSettings)
     const { currency } = pageSettings
     const { 
@@ -49,22 +61,39 @@ function Chart({symbol, id}: ChartProps) {
     
     // Custom chart from controller
     
+    const getDates = (array: undefined | Array<number[]>) => {
+        if (array === undefined) return;
+        const dates = array.map((data: number[]) => {
+            const iso = new Date(data[0]).toISOString()
+            const dt = DateTime.fromISO(iso)
+            const format = dt.toLocaleString({ year: 'numeric', month: 'short', day: 'numeric'})
+            return format
+        })
+        return dates;
+    }
 
-    const times = rawChartData?.prices.map((c) => {
-        const iso = new Date(c[0]).toISOString()
-        const dt = DateTime.fromISO(iso)
-        const format = dt.toLocaleString()
-        return format;
-    })
-    const values = rawChartData?.prices.map((c) => `${c[1]}`);
-    console.log(times, values)
+    const getData = (array: undefined | Array<number[]>) => {
+        if (array === undefined) return;
+        const dates = array.map((data: number[]) => {
+            const iso = new Date(data[0]).toISOString()
+            const dt = DateTime.fromISO(iso)
+            const format = dt.toLocaleString({ year: 'numeric', month: 'short', day: 'numeric'})
+            return format
+        })
+        const data = array.map((data: number[]) => data[1]);
+        return { dates, data }
+    }
+    
+    const prices = getData(rawChartData?.prices)
+    const volumes = getData(rawChartData?.total_volumes)
+    const marketcaps = getData(rawChartData?.market_caps)
+
 
     const data = {
-        labels: times,
+        labels: prices.dates,
         datasets: [{
-
-            data: values,
-            borderColor: '#50433D',
+            data: prices.data,
+            borderColor: '#7F6F68',
             borderWidth: 2,
             tension: 0.1,
             pointRadius: 0,
@@ -77,10 +106,17 @@ function Chart({symbol, id}: ChartProps) {
             tooltip: {
                 mode: 'index',
                 intersect: false,
+                position: 'average',
+                backgroundColor: '#F3F2F1',
+                titleColor: '#50433D',
+                bodyColor: '#50433D',
+                padding: 10,
+                borderColor: '#D1C9C7',
+                borderWidth: 1
             },
             crosshair: {
                 line: {
-                  color: '50433D',  // crosshair line color
+                  color: '#50433D',  // crosshair line color
                   width: 1,        // crosshair line width
                   dashPattern: [5, 5]
                 },
@@ -104,6 +140,7 @@ function Chart({symbol, id}: ChartProps) {
         responsive: true,
         scales: {
             y: {
+                type: chartType,
                 ticks: {
                     callback: function(value: any, index: any, ticks: any) {
                         return '$' + value
@@ -112,7 +149,7 @@ function Chart({symbol, id}: ChartProps) {
             },
             x: {
                 ticks: {
-                   maxTicksLimit: 20,
+                   maxTicksLimit: 10,
                 },
                 grid: {
                     display: false
@@ -123,7 +160,7 @@ function Chart({symbol, id}: ChartProps) {
     return (
             <StyledChart className='Chart'>
                 <h2 className="Chart-title">{symbol.toUpperCase()} Price Chart</h2>
-                <Line data={data} options={options} />
+                {isSuccess ? <Line data={data} options={options} /> : ''}
             </StyledChart>
     )
 }
