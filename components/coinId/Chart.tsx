@@ -16,7 +16,8 @@ import {
     LineController,
     Interaction,
     Legend,
-    LogarithmicScale
+    LogarithmicScale,
+    Filler
 } from 'chart.js'
 import  CrosshairPlugin, { Interpolate } from 'chartjs-plugin-crosshair'
 import { useEffect, useState } from "react"
@@ -32,7 +33,8 @@ ChartJS.register(
     LineController,
     Legend,
     CrosshairPlugin,
-    LogarithmicScale
+    LogarithmicScale,
+    Filler
 )
 
 interface ChartProps {
@@ -47,16 +49,8 @@ type DataType = 'price' | 'volume' | 'market_cap'
 
 function Chart({symbol, id}: ChartProps) {
     const [days, setDays] = useState<Days>(90)
-    const [dataSet, setDataSet] = useState<number[]>()
     const [chartType, setChartType] = useState<ChartType>('linear')
     const [dataType, setDataType] = useState<DataType>('price')
-    
-
-    useEffect(() => {
-        if (dataType === 'price') setDataSet(price.data)
-        if (dataType === 'volume') setDataSet(volume.data)
-        if (dataType === 'market_cap') setDataSet(market_cap.data)
-    }, [dataType])
 
     const pageSettings = useAppSelector((state: RootState) => state.apiSettings)
     const { currency } = pageSettings
@@ -66,19 +60,7 @@ function Chart({symbol, id}: ChartProps) {
         isSuccess
     } = useGetChartQuery({coin: id, currency: currency.name, days})
     
-    // Custom chart from controller
-    
-    const getDates = (array: undefined | Array<number[]>) => {
-        if (array === undefined) return;
-        const dates = array.map((data: number[]) => {
-            const iso = new Date(data[0]).toISOString()
-            const dt = DateTime.fromISO(iso)
-            const format = dt.toLocaleString({ year: 'numeric', month: 'short', day: 'numeric'})
-            return format
-        })
-        return dates;
-    }
-
+    // Get data from api
     const getData = (array: undefined | Array<number[]>) => {
         let dates: string[] = []
         let data: number[] = []
@@ -93,26 +75,35 @@ function Chart({symbol, id}: ChartProps) {
         return { dates, data }
     }
     
-    
-
+    // dataSets
     const price = getData(rawChartData?.prices)
     const volume = getData(rawChartData?.total_volumes)
     const market_cap = getData(rawChartData?.market_caps)
 
+    const getDataSet = () => {
+        if (dataType === 'price') return price.data
+        if (dataType === 'volume') return volume.data
+        if (dataType === 'market_cap') return market_cap.data
+    }
+
+    // Chart background-color
     
 
     const data = {
+        
         labels: price.dates,
         datasets: [
         {
-            data: dataSet,
+            data: getDataSet(),
             borderColor: '#7F6F68',
             borderWidth: 2,
             tension: 0.1,
             pointRadius: 0,
             pointHoverRadius: 0,
             pointHitRadius: 0,
-            yAxisId: 'y'
+            backgroundColor: 'rgba(127, 111, 104, 0.15)',
+            fill: true,
+            
         },
 
     ],
@@ -125,18 +116,16 @@ function Chart({symbol, id}: ChartProps) {
                 position: 'average',
                 backgroundColor: '#F3F2F1',
                 titleColor: '#50433D',
-                bodyColor: '#50433D',
+                bodyColor: '#50433d',
                 padding: 10,
                 borderColor: '#D1C9C7',
                 borderWidth: 1,
                 callbacks: {
                     label: (ctx: any) => {
-                        console.log(ctx);
-                        return `Price: ${currency.symbol + ctx.formattedValue}`;
+                        const capitalizeFirstLetter = (string: string) => string.charAt(0).toUpperCase() + string.slice(1)
+                        return `${capitalizeFirstLetter(dataType)}: ${currency.symbol + ctx.formattedValue}`;
                     },
-                    afterLabel: (ctx: any) => {
-                        return 
-                    }
+                    
                 }
             },
             crosshair: {
@@ -167,8 +156,11 @@ function Chart({symbol, id}: ChartProps) {
             y: {
                 type: chartType,
                 ticks: {
-                    callback: function(value: any, index: any, ticks: any) {
-                        return '$' + value
+                   callback: (value: number, index: number, values: number[]) => {
+                       return new Intl.NumberFormat('en-US', {
+                            style: 'currency',
+                            currency: currency.name
+                        }).format(value)
                     }
                 },
             },
@@ -187,6 +179,8 @@ function Chart({symbol, id}: ChartProps) {
         if (chartType === 'linear') setChartType('logarithmic')
         if (chartType === 'logarithmic') setChartType('linear')
     }
+
+   
 
     return (
             <StyledChart className='Chart'>
@@ -209,7 +203,7 @@ function Chart({symbol, id}: ChartProps) {
                         <a onClick={() => setDataType('volume')}>volume</a>
                     </div>
                 </div>
-                {isSuccess ? <Line data={data} options={options} /> : ''}
+                {isSuccess ? <Line data={data} options={options}/> : ''}
             </StyledChart>
     )
 }
