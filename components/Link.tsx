@@ -36,7 +36,7 @@ const StyledLink = styled.a<StyledLinkProps>`
         css`
             cursor: pointer;
             color: ${props => props.theme.color.eta};
-            background-color: ${props.theme.color.gamma} 
+            background-color: ${props.theme.color.beta} 
         `}
     }
     
