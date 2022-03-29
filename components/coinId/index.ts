@@ -5,6 +5,7 @@ import Links from "./Links";
 import Ticker from "./Ticker";
 import Price from "./Price";
 import Stats from "./Stats";
+import SmallStats from "./SmallStats";
 import Performance from "./Performance";
 
-export {Chart, Description, Header, Links, Ticker, Price, Stats, Performance}
+export {SmallStats, Chart, Description, Header, Links, Ticker, Price, Stats, Performance}

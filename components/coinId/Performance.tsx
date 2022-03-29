@@ -37,6 +37,7 @@ function Performance({p_24h, p_7d, p_30d, p_60d, p_200d, p_1y}: PerformanceProps
 const StyledPerformance = styled.table`
     .Performance {
         &-row {
+            margin: 0 auto;
             &-upper {
                 background-color: ${props => props.theme.color.zeta};
             }

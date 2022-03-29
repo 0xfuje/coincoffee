@@ -29,7 +29,7 @@ const StyledDescription = styled.div`
     }
     .Description {
         &-title {
-            font-size: ${props => props.theme.font.size.alpha};
+            font-size: ${props => props.theme.font.size.beta};
             font-weight: ${props => props.theme.font.weight.alpha};
             margin-bottom: ${props => props.theme.space.theta};
         }

@@ -6,7 +6,7 @@ import { CoinApiResult } from '../../../types'
 import styled from 'styled-components'
 import { useAppSelector } from '../../../app/hooks'
 import { RootState } from '../../../app/store'
-import {Price, Header, Description, Stats, Performance, Links, Chart} from '../../../components/coinId'
+import {Price, Header, Description, Stats, Performance, Links, Chart, SmallStats} from '../../../components/coinId'
 import Markets from '../../../components/coinId/Markets'
 
 interface CoinIdPageProps {
@@ -14,7 +14,7 @@ interface CoinIdPageProps {
     tickers: TickerApiResult
 }
 
-type ActiveTab = 'chart' | 'markets' | 'price-stats' | 'description';
+type ActiveTab = 'chart' | 'markets' | 'stats' | 'description';
 
 
 
@@ -30,6 +30,12 @@ function CoinIdPage({ coin, tickers }: CoinIdPageProps) {
             symbol={coin.symbol}
             logo={coin.image.large}
             market_cap_rank={coin.market_cap_rank}
+        />,
+        SmallStats: <SmallStats
+            symbol={coin.symbol}
+            market_cap={coin.market_data.market_cap[currencyName]}
+            volume={coin.market_data.total_volume[currencyName]}
+            currency={currency.symbol}
         />,
         Stats: <Stats
             name={coin.name}
@@ -52,6 +58,7 @@ function CoinIdPage({ coin, tickers }: CoinIdPageProps) {
             full_valuation={coin.market_data.fully_diluted_valuation[currencyName]}
             currency={currency.symbol}
         />,
+        
         Price: <Price
             name={coin.name}
             price={coin.market_data.current_price[currencyName]}
@@ -91,19 +98,94 @@ function CoinIdPage({ coin, tickers }: CoinIdPageProps) {
         <StyledCoinIdPage>
             <Heading isSubTitleDisplayed={false}/>
             <div className="CoinIdPage">
-                {coinIdComponents.Header}
-                {coinIdComponents.Links}
-                {coinIdComponents.Price}
-                {/* {coinIdComponents.Perfomance}
-                {coinIdComponents.Stats}
-                {coinIdComponents.Markets}
-                {coinIdComponents.Description} */}
-                {coinIdComponents.Chart}
+                <div className="CoinIdPage-upper">
+                    <div className="CoinIdPage-upper-left">
+                        {coinIdComponents.Header}
+                        {coinIdComponents.Links}
+                        {coinIdComponents.Price}
+                    </div>
+                    <div className="CoinIdPage-upper-right">
+                        {coinIdComponents.SmallStats}
+                    </div>
+                </div>
+                <div className="CoinIdPage-tabSettings">
+                    <ul className="CoinIdPage-tabSettings-list">
+                        <li className='CoinIdPage-tabSettings-list-item'>
+                            <button
+                                className={`CoinIdPage-tabSettings-chart CoinIdPage-tabSettings-list-item-button
+                                CoinIdPage-tabSettings-${activeTab === 'chart' ? 'active' : 'inactive'}`}
+                                onClick={() => setActiveTab('chart')}
+                            >
+                                Chart
+                            </button>
+                        </li>
+                        <li className='CoinIdPage-tabSettings-list-item'>
+                            <button
+                                className={`CoinIdPage-tabSettings-markets CoinIdPage-tabSettings-list-item-button
+                                CoinIdPage-tabSettings-${activeTab === 'markets' ? 'active' : 'inactive'}`}
+                                onClick={() => setActiveTab('markets')}
+                            >
+                                Markets
+                            </button>
+                        </li>
+                        <li className='CoinIdPage-tabSettings-list-item'>
+                            <button
+                                className={`CoinIdPage-tabSettings-stats CoinIdPage-tabSettings-list-item-button
+                                CoinIdPage-tabSettings-${activeTab === 'stats' ? 'active' : 'inactive'}`}
+                                onClick={() => setActiveTab('stats')}
+                            >
+                                Stats
+                            </button>
+                        </li>
+                        <li className='CoinIdPage-tabSettings-list-item'>
+                            <button
+                                className={`CoinIdPage-tabSettings-description CoinIdPage-tabSettings-list-item-button
+                                CoinIdPage-tabSettings-${activeTab === 'description' ? 'active' : 'inactive'}`}
+                                onClick={() => setActiveTab('description')}
+                            >
+                                Description
+                            </button>
+                        </li>
+                    </ul>
+                </div>
                 <div className="CoinIdPage-tabs">
-                    <div className="CoinIdPage-tabs-chart"></div>
-                    <div className="CoinIdPage-tabs-chart"></div>
-                    <div className="CoinIdPage-tabs-chart"></div>
-                    <div className="CoinIdPage-tabs-chart"></div>
+                    <div
+                        className={`CoinIdPage-tabs-chart
+                        CoinIdPage-tabs-${activeTab === 'chart' ? 'active' : 'inactive'}`}
+                    >
+                        {coinIdComponents.Chart}
+                    </div>
+                    <div
+                        className={`CoinIdPage-tabs-markets
+                        CoinIdPage-tabs-${activeTab === 'markets' ? 'active' : 'inactive'}`}
+                    >
+                        {coinIdComponents.Markets}
+                    </div>
+                    <div
+                        className={`CoinIdPage-tabs-stats
+                        CoinIdPage-tabs-${activeTab === 'stats' ? 'active' : 'inactive'}`}
+                    >
+                        {coinIdComponents.Perfomance}
+                        <br/>
+                        {coinIdComponents.Stats}
+                    </div>
+                    <div
+                        className={`CoinIdPage-tabs-description
+                        CoinIdPage-tabs-${activeTab === 'description' ? 'active' : 'inactive'}`}
+                    >
+                        {coinIdComponents.Description}
+                    </div>
+                </div>
+                <div className="CoinIdPage-body">
+                    <div className="CoinIdPage-body-left">
+                        
+                        {coinIdComponents.Markets}
+                        {coinIdComponents.Description}
+                    </div>
+                    <div className="CoinIdPage-body-right">
+                        {coinIdComponents.Stats}
+                        {coinIdComponents.Perfomance}
+                    </div>
                 </div>
             </div>
            
@@ -113,11 +195,80 @@ function CoinIdPage({ coin, tickers }: CoinIdPageProps) {
 
 const StyledCoinIdPage = styled.div`
     .CoinIdPage {
-        margin: ${props => props.theme.space.eta} auto;
-        max-width: ${props => props.theme.max_width};
-        & > * {
-            margin-bottom: ${props => props.theme.space.epsilon};
+        &-upper {
+            margin: 0 auto;
+            max-width: ${props => props.theme.max_width};
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            &-left {
+                margin-bottom: ${props => props.theme.space.epsilon};
+                & > * {
+                    margin-bottom: ${props => props.theme.space.zeta};
+                }
+            }
+
         }
+        &-body {
+            margin: 0 auto;
+            margin-top: ${props => props.theme.space.beta};
+            max-width: ${props => props.theme.max_width};
+            display: flex;
+            justify-content: space-between;
+            gap: ${props => props.theme.space.alpha};
+            &-right {
+                & > * {
+                    margin-bottom: ${props => props.theme.space.beta};
+                }
+                flex-grow: 1;
+            }
+            &-left {
+                & > * {
+                    margin-bottom: ${props => props.theme.space.beta};
+                }
+            }
+        }
+        
+        &-tabSettings {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: ${props => props.theme.space.gamma};
+            border-bottom: 1px solid ${props => props.theme.color.epsilon};
+            &-active {
+                font-weight: ${props => props.theme.font.weight.alpha};
+                color: ${props => props.theme.color.beta};
+                border-bottom: 3px solid ${props => props.theme.color.beta};
+            }
+            &-inactive {
+                border-bottom: 3px solid transparent
+            }
+            &-list {
+                display: flex;
+                align-items: center;
+                color: ${props => props.theme.color.delta};
+                gap: ${props => props.theme.space.epsilon};
+                
+                &-item {
+                    &-button {
+                        font-size: ${props => props.theme.font.size.gamma};
+                        padding: ${props => props.theme.space.theta};
+                    }
+                }
+            }
+            
+        }
+        &-tabs {
+            margin: ${props => props.theme.space.eta} auto;
+            max-width: ${props => props.theme.max_width};
+            &-active {
+
+            }
+            &-inactive {
+                display: none;
+            }
+        }
+        
         
     }
 `

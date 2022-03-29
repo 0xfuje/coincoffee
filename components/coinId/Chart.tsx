@@ -207,7 +207,8 @@ function Chart({symbol, id}: ChartProps) {
                     display: true,
                     drawBorder: true,
                     drawOnChartArea: false,
-                    drawTicks: true
+                    drawTicks: true,
+                    color: '#A49792'
                 }
             }
         }
@@ -222,8 +223,8 @@ function Chart({symbol, id}: ChartProps) {
 
     return (
         <StyledChart className='Chart' days={days} chartType={chartType} dataType={dataType}>
-            <div className="Chart-upper"> 
             <h2 className="Chart-title">{symbol.toUpperCase()} Chart</h2>
+            <div className="Chart-upper"> 
                 <div className="Chart-setting Chart-setting-chart">
                     <ul className="Chart-setting-list">
                         <li><button className={`Chart-setting-button-${dataType === 'price' ? 'active' : 'inactive'}`} onClick={() => setDataType('price')}>price</button></li>
@@ -300,7 +301,7 @@ const StyledChart = styled.div<StyledChartProps>`
             &-button {
                 &-active, &-inactive {
                     font-size: ${props => props.theme.font.size.delta};
-                    padding: ${props => props.theme.space.eta} ${props => props.theme.space.zeta};
+                    padding: ${props => props.theme.space.zeta} ${props => props.theme.space.epsilon};
                     border-radius: ${props => props.theme.space.theta};
                 }
                 &-inactive {

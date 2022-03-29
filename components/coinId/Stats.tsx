@@ -32,7 +32,7 @@ function Stats({
 }: StatsProps) {
   return (
     <StyledStats className='Stats'>
-        <h2 className='Stats-title'>{symbol.toUpperCase()} Price Statistics</h2>
+        <h2 className='Stats-title'>Price Statistics</h2>
         <ul className="Stats-list">
             <li className='Stats-list-item'>
                 <span className='Stats-list-item-description'>{name} price</span>
@@ -114,9 +114,9 @@ const StyledStats = styled.div`
     .Stats {
         &-title {
             position: relative;
-            font-size: ${props => props.theme.font.size.alpha};
+            font-size: ${props => props.theme.font.size.beta};
             font-weight: ${props => props.theme.font.weight.alpha};
-            margin-bottom: ${props => props.theme.space.epsilon};
+            margin-bottom: ${props => props.theme.space.eta};
             &::after {
                 position: absolute;
                 content: '';

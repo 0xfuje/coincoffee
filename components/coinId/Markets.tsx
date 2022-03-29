@@ -36,9 +36,6 @@ function Markets({name, tickers}: MarketsProps) {
                 </div>
             </div>
             {render5Tickers}
-            <div className="Markets-button">
-                <Button text="Show All" onClick={() => console.log('hi')}/>
-            </div>
         </StyledMarkets>
     )
 }
@@ -48,7 +45,7 @@ const StyledMarkets = styled.div`
     .Markets {
         &-header {
             &-title {
-                font-size: ${props => props.theme.font.size.alpha};
+                font-size: ${props => props.theme.font.size.beta};
                 font-weight: ${props => props.theme.font.weight.alpha};
                 margin-bottom: ${props => props.theme.space.eta};
             }

@@ -86,6 +86,8 @@ const StyledPrice = styled.div<StyledPriceProps>`
             color: ${props => props.theme.color.delta};
             span {
                 display: flex;
+                flex-direction: column;
+                align-items: flex-end;
             }
         }
         &-bar {
