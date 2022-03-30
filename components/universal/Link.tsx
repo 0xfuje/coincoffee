@@ -26,7 +26,8 @@ const StyledLink = styled.a<StyledLinkProps>`
     gap: ${props => props.theme.space.eta};
     font-size: ${props => props.theme.font.size.delta};
     // font-weight: ${props => props.theme.font.weight.alpha};
-    background-color: ${props => props.theme.color.epsilon};
+    background-color: ${props => props.theme.color.zeta};
+    border: 1px solid ${props => props.theme.color.epsilon};
     color: ${props => props.theme.color.beta};
     padding: ${props => (props.size === 'big') ?  props.theme.space.eta : props.theme.space.theta};
     border-radius: ${props => props.theme.space.iota};

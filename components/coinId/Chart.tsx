@@ -223,8 +223,9 @@ function Chart({symbol, id}: ChartProps) {
 
     return (
         <StyledChart className='Chart' days={days} chartType={chartType} dataType={dataType}>
-            <h2 className="Chart-title">{symbol.toUpperCase()} Chart</h2>
-            <div className="Chart-upper"> 
+            <h2 className="Chart-title Chart-title-origin">{symbol.toUpperCase()} Chart</h2>
+            <div className="Chart-upper">
+                <h2 className="Chart-title Chart-title-upper">{symbol.toUpperCase()} Chart</h2>
                 <div className="Chart-setting Chart-setting-chart">
                     <ul className="Chart-setting-list">
                         <li><button className={`Chart-setting-button-${dataType === 'price' ? 'active' : 'inactive'}`} onClick={() => setDataType('price')}>price</button></li>
@@ -264,6 +265,18 @@ const StyledChart = styled.div<StyledChartProps>`
             font-size: ${props => props.theme.font.size.beta};
             font-weight: ${props => props.theme.font.weight.alpha};
             margin-bottom: ${props => props.theme.space.eta};
+            &-origin {
+                display: block;
+                @media screen and (min-width: ${props => props.theme.breakpoint.zeta}) {
+                    display: none;
+                }
+            }
+            &-upper {
+                display: none;
+                @media screen and (min-width: ${props => props.theme.breakpoint.zeta}) {
+                    display: block;
+                }
+            }
         }
         &-upper {
             display: flex;
@@ -290,6 +303,7 @@ const StyledChart = styled.div<StyledChartProps>`
             }
             &-chart {
                 text-transform: capitalize;
+                
             }
             &-list {
                 display: inline-flex;
@@ -301,14 +315,17 @@ const StyledChart = styled.div<StyledChartProps>`
             &-button {
                 &-active, &-inactive {
                     font-size: ${props => props.theme.font.size.delta};
-                    padding: ${props => props.theme.space.zeta} ${props => props.theme.space.epsilon};
+                    @media screen and (min-width: ${props => props.theme.breakpoint.epsilon}) {
+                        font-size: ${props => props.theme.font.size.gamma};
+                    }
+                    padding: ${props => props.theme.space.eta} ${props => props.theme.space.zeta};
                     border-radius: ${props => props.theme.space.theta};
                 }
                 &-inactive {
                     color: ${props => props.theme.color.beta};
-                    background-color: ${props => props.theme.color.eta};
+                    background-color: ${props => props.theme.color.zeta};
                     &:hover {
-                        background-color: ${props => props.theme.color.zeta};
+                        background-color: ${props => props.theme.color.epsilon};
                     }
                 }
                 &-active {

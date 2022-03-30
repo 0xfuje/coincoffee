@@ -1,4 +1,17 @@
-import { createGlobalStyle } from "styled-components"; 
+import { createGlobalStyle, css } from "styled-components"; 
+
+const globalPagePadding = css`
+    padding: 0 ${props => props.theme.space.eta};
+    @media screen and (min-width: ${props => props.theme.breakpoint.zeta}) {
+        padding: 0 ${props => props.theme.space.epsilon};
+    }
+    @media screen and (min-width: ${props => props.theme.breakpoint.epsilon}) {
+        padding: 0 ${props => props.theme.space.delta};
+    }
+    @media screen and (min-width: ${props => props.theme.breakpoint.delta}) {
+        padding: 0 ${props => props.theme.space.gamma};
+    }
+`
 
 const GlobalStyle = createGlobalStyle`
     // CSS RESET START - credit to elad2412
@@ -40,3 +53,4 @@ const GlobalStyle = createGlobalStyle`
 `
 
 export default GlobalStyle;
+export { globalPagePadding }

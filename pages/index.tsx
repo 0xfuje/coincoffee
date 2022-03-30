@@ -4,12 +4,12 @@ import styled from 'styled-components'
 import { useAppSelector, useAppDispatch } from '../app/hooks'
 import CoinList from '../components/list/CoinList'
 import { useGetListQuery } from '../slices/api/apiSlice'
-import PageSettings from '../components/PageSettings'
-import PageNavigation from '../components/PageNavigation'
+import PageSettings from '../components/list/PageSettings'
+import PageNavigation from '../components/list/PageNavigation'
 import { RootState } from '../app/store'
 import { changeCurrency, changeOrder, changePageNumber, changePriceChange } from '../slices/api/apiSettingsSlice'
 import { ListApiOrder, ListApiPriceChange, SupportedCurrencies } from '../types'
-import Heading from '../components/Heading'
+import Heading from '../components/universal/Heading'
 
 
 const Home: NextPage = () => {

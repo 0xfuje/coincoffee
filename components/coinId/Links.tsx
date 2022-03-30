@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import Link from '../Link'
+import Link from '../universal/Link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHouse, faUsers, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { faGithub, faFacebook, faTelegram, faReddit, faTwitter } from '@fortawesome/free-brands-svg-icons'

@@ -1,9 +1,6 @@
 import styled from 'styled-components'
 import React from 'react'
-import { ListApiOrder, ListApiPriceChange, SupportedCurrencies } from '../types'
-
-
-
+import { ListApiOrder, ListApiPriceChange, SupportedCurrencies } from '../../types'
 
 export interface PageSettingsProps {
     setCurrency: (currency: SupportedCurrencies) => any

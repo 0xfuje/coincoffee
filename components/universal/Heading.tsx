@@ -1,8 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useGetGlobalQuery } from '../slices/api/apiSlice'
-import { convertNum } from '../helpers'
+import { useGetGlobalQuery } from '../../slices/api/apiSlice'
+import { convertNum } from '../../helpers'
 import Link from 'next/link'
+import { globalPagePadding } from '../../styles/GlobalStyle'
 
 interface HeadingProps {
     readonly isSubTitleDisplayed: boolean
@@ -59,6 +60,7 @@ const StyledHeading = styled.div<HeadingProps>`
             display: none;
             gap: ${props => props.theme.space.delta};
             margin: ${props => props.theme.space.zeta} auto;
+            ${globalPagePadding};
             padding-left: ${props => props.theme.space.zeta};
             font-size: ${props => props.theme.font.size.delta};
             @media screen and (min-width: ${props => props.theme.breakpoint.zeta}) {

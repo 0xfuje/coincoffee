@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { ListApiPriceChange, ListApiResult } from '../../types';
 import { useAppSelector } from '../../app/hooks';
 import { RootState } from '../../app/store'
+import { globalPagePadding } from '../../styles/GlobalStyle';
 
 interface CoinListProps {
     coins: ListApiResult[] | undefined,
@@ -65,6 +66,7 @@ const StyledCoinList = styled.div`
     display: block;
     width: 100%;
     margin: ${props => props.theme.space.eta} auto 0;
+    ${globalPagePadding};
     max-width: ${props => props.theme.max_width};
     .CoinList {
         &-header {

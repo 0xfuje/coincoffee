@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Image from 'next/image'
-import {default as MyLink} from '../Link'
+import {default as MyLink} from '../universal/Link'
 import {default as NextLink} from 'next/link'
 
 interface HeaderProps {
