@@ -110,7 +110,7 @@ function Stats({
 }
 
 const StyledStats = styled.div`
-    max-width: ${props => props.theme.breakpoint.zeta};
+    // max-width: ${props => props.theme.breakpoint.zeta};
     .Stats {
         &-title {
             position: relative;

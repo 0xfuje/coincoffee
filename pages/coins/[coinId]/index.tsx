@@ -1,6 +1,7 @@
 import { ListApiResult, TickerApiResult } from '../../../types'
 import { GetStaticProps, GetStaticPaths } from 'next'
-import Heading from '../../../components/universal/Heading'
+import PageHeader from '../../../components/universal/PageHeader'
+import PageFooter from '../../../components/universal/PageFooter'
 import { CoinApiResult } from '../../../types'
 import styled, { css } from 'styled-components'
 import { useAppSelector } from '../../../app/hooks'
@@ -90,7 +91,7 @@ function CoinIdPage({ coin, tickers }: CoinIdPageProps) {
 
     return (
         <StyledCoinIdPage>
-            <Heading isSubTitleDisplayed={false}/>
+            <PageHeader isSubTitleDisplayed={false}/>
             <div className="CoinIdPage">
                 <div className="CoinIdPage-upper">
                     <div className="CoinIdPage-upper-left">
@@ -107,16 +108,16 @@ function CoinIdPage({ coin, tickers }: CoinIdPageProps) {
                 </div>
                 <div className="CoinIdPage-body">
                     <div className="CoinIdPage-body-left">
-                        {components.Markets}
-                        {components.Description}
+                        <div className="CoinIdPage-body-left-markets">{components.Markets}</div>
+                        <div className="CoinIdPage-body-left-description">{components.Description}</div>
                     </div>
                     <div className="CoinIdPage-body-right">
-                        {components.Stats}
-                        {components.Perfomance}
+                        <div className="CoinIdPage-body-right-stats">{components.Stats}</div>
+                        <div className="CoinIdPage-body-right-performance">{components.Perfomance}</div>
                     </div>
                 </div>
             </div>
-           
+            <PageFooter />
         </StyledCoinIdPage>
     )
 }
@@ -141,6 +142,9 @@ const StyledCoinIdPage = styled.div`
             }
             &-right {
                 display: none;
+                @media screen and (min-width: ${props => props.theme.breakpoint.epsilon}) {
+                    display: block;
+                }
             }
 
         }
@@ -154,14 +158,20 @@ const StyledCoinIdPage = styled.div`
             max-width: ${props => props.theme.max_width};
             justify-content: space-between;
             gap: ${props => props.theme.space.alpha};
+            ${globalPagePadding}
+            @media screen and (min-width: ${props => props.theme.breakpoint.gamma}) {
+                display: flex;
+            }
             &-right {
                 & > * {
+                    max-width: ${props => props.theme.breakpoint.zeta};
                     margin-bottom: ${props => props.theme.space.beta};
                 }
                 flex-grow: 1;
             }
             &-left {
                 & > * {
+                    max-width: ${props => props.theme.breakpoint.zeta};
                     margin-bottom: ${props => props.theme.space.beta};
                 }
             }

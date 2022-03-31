@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { TickerApiResult } from '../../types'
 import Ticker from './Ticker'
-import Button from '../Button'
+import Button from '../universal/Button'
 
 interface MarketsProps {
     name: string,
@@ -41,7 +41,7 @@ function Markets({name, tickers}: MarketsProps) {
 }
 
 const StyledMarkets = styled.div`
-    max-width: ${props => props.theme.breakpoint.zeta};
+    // max-width: ${props => props.theme.breakpoint.zeta};
     .Markets {
         &-header {
             &-title {

@@ -19,7 +19,7 @@ function Description({name, text}: DescriptionProps) {
 }
 
 const StyledDescription = styled.div`
-    max-width: ${props => props.theme.breakpoint.zeta};
+    // max-width: ${props => props.theme.breakpoint.zeta};
 
     a {
         font-weight: ${props => props.theme.font.weight.alpha};

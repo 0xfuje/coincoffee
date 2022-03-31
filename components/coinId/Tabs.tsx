@@ -94,7 +94,6 @@ function Tabs({components}: TabsProps) {
 const StyledTabs = styled.div`
 .Tabs {
     &-settings {
-        
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -130,6 +129,7 @@ const StyledTabs = styled.div`
                 display: none;
         }
     }
+    
 }
     
 `;

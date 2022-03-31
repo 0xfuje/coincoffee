@@ -5,11 +5,11 @@ import { convertNum } from '../../helpers'
 import Link from 'next/link'
 import { globalPagePadding } from '../../styles/GlobalStyle'
 
-interface HeadingProps {
+interface PageHeaderProps {
     readonly isSubTitleDisplayed: boolean
 }
 
-function Heading({isSubTitleDisplayed}: HeadingProps) {
+function PageHeader({isSubTitleDisplayed}: PageHeaderProps) {
 
     const {
         data: global,
@@ -20,41 +20,41 @@ function Heading({isSubTitleDisplayed}: HeadingProps) {
     const volume = convertNum(global?.data.total_volume.usd!)
 
     return (
-        <StyledHeading className="Heading" isSubTitleDisplayed={isSubTitleDisplayed}>
-            <div className="Heading-stats">
-                <div className="Heading-stats-coins">
-                   <span className='Heading-stats-title'>Coins: </span>
-                    <a className='Heading-stats-link'>{global?.data.active_cryptocurrencies}</a>
+        <StyledPageHeader className="PageHeader" isSubTitleDisplayed={isSubTitleDisplayed}>
+            <div className="PageHeader-stats">
+                <div className="PageHeader-stats-coins">
+                   <span className='PageHeader-stats-title'>Coins: </span>
+                    <a className='PageHeader-stats-link'>{global?.data.active_cryptocurrencies}</a>
                 </div>
-                <div className="Heading-stats-exchanges">
-                    <span className='Heading-stats-title'>Exchanges: </span>
-                    <a className='Heading-stats-link'>{global?.data.markets}</a>
+                <div className="PageHeader-stats-exchanges">
+                    <span className='PageHeader-stats-title'>Exchanges: </span>
+                    <a className='PageHeader-stats-link'>{global?.data.markets}</a>
                 </div>
-                <div className="Heading-stats-marketCap">
-                    <span className='Heading-stats-title'>Market Cap: </span>
-                    <a className='Heading-stats-link'>${marketCap}</a>
+                <div className="PageHeader-stats-marketCap">
+                    <span className='PageHeader-stats-title'>Market Cap: </span>
+                    <a className='PageHeader-stats-link'>${marketCap}</a>
                 </div>
-                <div className="Heading-stats-volume">
-                    <span className='Heading-stats-title'>Volume: </span>
-                    <a className='Heading-stats-link'>${volume}</a>
+                <div className="PageHeader-stats-volume">
+                    <span className='PageHeader-stats-title'>Volume: </span>
+                    <a className='PageHeader-stats-link'>${volume}</a>
                 </div>
-                <div className='Heading-stats-dominance'>
-                    <span className='Heading-stats-title'>Dominance: </span>
-                    <span className='Heading-stats-title'>BTC </span>
-                    <a className='Heading-stats-link'>{global?.data.market_cap_percentage.btc.toFixed(1)}%&nbsp;&nbsp;</a>
-                    <span className='Heading-stats-title'>ETH </span>
-                    <a className='Heading-stats-link'>{global?.data.market_cap_percentage.eth.toFixed(1)}%</a>
+                <div className='PageHeader-stats-dominance'>
+                    <span className='PageHeader-stats-title'>Dominance: </span>
+                    <span className='PageHeader-stats-title'>BTC </span>
+                    <a className='PageHeader-stats-link'>{global?.data.market_cap_percentage.btc.toFixed(1)}%&nbsp;&nbsp;</a>
+                    <span className='PageHeader-stats-title'>ETH </span>
+                    <a className='PageHeader-stats-link'>{global?.data.market_cap_percentage.eth.toFixed(1)}%</a>
                 </div>
             </div>
-            <Link href='/'><a><h1 className='Heading-title'>CoinCoffee ☕</h1></a></Link>
-            <p className="Heading-subtitle">Your daily dose of crypto caffeine, served in a delicious coffee</p>
-            <hr className="Heading-line" />
-        </StyledHeading>
+            <Link href='/'><a><h1 className='PageHeader-title'>CoinCoffee ☕</h1></a></Link>
+            <p className="PageHeader-subtitle">Your daily dose of crypto caffeine, served in a delicious coffee</p>
+            <hr className="PageHeader-line" />
+        </StyledPageHeader>
   )
 }
 
-const StyledHeading = styled.div<HeadingProps>`
-    .Heading {
+const StyledPageHeader = styled.header<PageHeaderProps>`
+    .PageHeader {
         &-stats {
             max-width: ${props => props.theme.max_width};
             display: none;
@@ -115,6 +115,6 @@ const StyledHeading = styled.div<HeadingProps>`
     }
 `
 
-export default Heading;
+export default PageHeader;
 
 

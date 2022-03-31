@@ -9,6 +9,7 @@ export const convertNum = (num: number) => {
 }
 
 export const convertColor = (num: number) => {
-    if (num >= 0) return 'green'
+    if (num > 0) return 'green'
     if (num < 0) return 'red'
+    if (num === 0) return 'neutral'
 }

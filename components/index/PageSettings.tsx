@@ -30,13 +30,13 @@ function PageSettings(
                 onChange={(e) => setCurrency(e.target.value as SupportedCurrencies)}
                 value={currency}
             >
-                <option value="usd">USD - $</option>
-                <option value="eur">EUR - €</option>
-                <option value="gbp">GBP - £</option>
-                <option value="cny">CNY - ¥</option>
-                <option value="jpy">JPY - ¥</option>
-                <option value="btc">BTC - ₿</option>
-                <option value="eth">ETH - Ξ</option>
+                <option value="usd">USD</option>
+                <option value="eur">EUR</option>
+                <option value="gbp">GBP</option>
+                <option value="cny">CNY</option>
+                <option value="jpy">JPY</option>
+                <option value="btc">BTC</option>
+                <option value="eth">ETH</option>
             </select>
             
         </div>
@@ -97,6 +97,7 @@ const StyledPageSettings = styled.div`
             grid-template-areas: "select";
             padding: ${props => props.theme.space.theta} ${props => props.theme.space.zeta};
             border-radius: ${props => props.theme.space.theta};
+            
             background-color: ${props => props.theme.color.epsilon};
             cursor: pointer;
             align-items: center;

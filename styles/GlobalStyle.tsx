@@ -38,9 +38,16 @@ const GlobalStyle = createGlobalStyle`
         line-break: after-white-space;
     }
     :where([draggable="true"]) { -webkit-user-drag: element; }
+
+    html, body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
     // CSS RESET END
 
     body {
+        position: relative;
         font-family: 'Montserrat', sans-serif;
         font-size: 14px;
         color: ${props => props.theme.color.beta};

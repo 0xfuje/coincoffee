@@ -2,14 +2,15 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import styled from 'styled-components'
 import { useAppSelector, useAppDispatch } from '../app/hooks'
-import CoinList from '../components/list/CoinList'
+import CoinList from '../components/index/CoinList'
 import { useGetListQuery } from '../slices/api/apiSlice'
-import PageSettings from '../components/list/PageSettings'
-import PageNavigation from '../components/list/PageNavigation'
+import PageSettings from '../components/index/PageSettings'
+import PageNavigation from '../components/index/PageNavigation'
 import { RootState } from '../app/store'
 import { changeCurrency, changeOrder, changePageNumber, changePriceChange } from '../slices/api/apiSettingsSlice'
 import { ListApiOrder, ListApiPriceChange, SupportedCurrencies } from '../types'
-import Heading from '../components/universal/Heading'
+import PageHeader from '../components/universal/PageHeader'
+import PageFooter from '../components/universal/PageFooter'
 
 
 const Home: NextPage = () => {
@@ -37,7 +38,7 @@ const Home: NextPage = () => {
                 <meta name="description" content="Your daily dose of crypto caffeine, served in a delicious coffee" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Heading isSubTitleDisplayed={true} />
+            <PageHeader isSubTitleDisplayed={true} />
             <PageSettings
                 setCurrency={setCurrency} currency={currencyName}
                 setOrder={setOrder} order={order}
@@ -48,7 +49,7 @@ const Home: NextPage = () => {
                 pageNumber={pageNumber}
                 setPageNumber={setPageNumber}
             />
-
+            <PageFooter />
             
         </StyledHome>
     )

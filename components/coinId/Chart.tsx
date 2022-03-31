@@ -86,11 +86,13 @@ function Chart({symbol, id}: ChartProps) {
     const market_cap = getData(rawChartData?.market_caps)
 
     const getDataSet = () => {
-        if (dataType === 'price') return price.data
-        if (dataType === 'volume') return volume.data
-        if (dataType === 'market_cap') return market_cap.data
+        if (dataType === 'price') return price.data;
+        if (dataType === 'volume') return volume.data;
+        if (dataType === 'market_cap') return market_cap.data;
     }
 
+    console.log(price.data[0]);
+    console.log(...price.data.slice(-1));
 
     const getChartData = () => {
         /* const ctx = canvas.getContext('2d')

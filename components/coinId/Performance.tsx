@@ -14,22 +14,24 @@ interface PerformanceProps {
 function Performance({p_24h, p_7d, p_30d, p_60d, p_200d, p_1y}: PerformanceProps) {
     return (
         <StyledPerformance className='Performance'>
-            <thead className="Performance-row-upper">
-                <td className={`Performance-data`}>24h</td>
-                <td className={`Performance-data`}>7d</td>
-                <td className={`Performance-data`}>30d</td>
-                <td className={`Performance-data`}>60d</td>
-                <td className={`Performance-data`}>200d</td>
-                <td className={`Performance-data`}>1y</td>
-            </thead>
-            <tr className="Performance-row-lower">
-                <td className={`Performance-data Performance-data-${convertColor(p_24h)}`}>{p_24h.toFixed(1)}%</td>
-                <td className={`Performance-data Performance-data-${convertColor(p_7d)}`}>{p_7d.toFixed(1)}%</td>
-                <td className={`Performance-data Performance-data-${convertColor(p_30d)}`}>{p_30d.toFixed(1)}%</td>
-                <td className={`Performance-data Performance-data-${convertColor(p_60d)}`}>{p_60d.toFixed(1)}%</td>
-                <td className={`Performance-data Performance-data-${convertColor(p_200d)}`}>{p_200d.toFixed(1)}%</td>
-                <td className={`Performance-data Performance-data-${convertColor(p_1y)}`}>{p_1y.toFixed(1)}%</td>
-            </tr>
+            <tbody>
+                <tr className="Performance-row-upper">
+                    <td className={`Performance-data`}>24h</td>
+                    <td className={`Performance-data`}>7d</td>
+                    <td className={`Performance-data`}>30d</td>
+                    <td className={`Performance-data`}>60d</td>
+                    <td className={`Performance-data`}>200d</td>
+                    <td className={`Performance-data`}>1y</td>
+                </tr>
+                <tr className="Performance-row-lower">
+                    <td className={`Performance-data Performance-data-${convertColor(p_24h)}`}>{p_24h.toFixed(1)}%</td>
+                    <td className={`Performance-data Performance-data-${convertColor(p_7d)}`}>{p_7d.toFixed(1)}%</td>
+                    <td className={`Performance-data Performance-data-${convertColor(p_30d)}`}>{p_30d.toFixed(1)}%</td>
+                    <td className={`Performance-data Performance-data-${convertColor(p_60d)}`}>{p_60d.toFixed(1)}%</td>
+                    <td className={`Performance-data Performance-data-${convertColor(p_200d)}`}>{p_200d.toFixed(1)}%</td>
+                    <td className={`Performance-data Performance-data-${convertColor(p_1y)}`}>{p_1y.toFixed(1)}%</td>
+                </tr>
+            </tbody>
         </StyledPerformance>
     )
 }

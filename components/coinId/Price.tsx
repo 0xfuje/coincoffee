@@ -13,6 +13,7 @@ interface PriceProps {
 }
 interface StyledPriceProps {
     readonly isPriceChangePos: boolean
+    readonly barPercentage: number
 }
 
 
@@ -20,8 +21,9 @@ function Price({name, price, low_24h, high_24h, change_24h, btc, eth, currency}:
     const isPriceChangePos: boolean = (change_24h >= 0) ? true : false
     const change_24h_perc = (change_24h).toFixed(1)
     const change_24h_prefix = isPriceChangePos ? '+' : ''
+    const barPercentage = (low_24h / high_24h)
     return (
-        <StyledPrice className='Price' isPriceChangePos={isPriceChangePos}>
+        <StyledPrice className='Price' isPriceChangePos={isPriceChangePos} barPercentage={barPercentage}>
             <p className='Price-name'>{name} Price</p>
             <div className="Price-row">
                 <div className="Price-price">
@@ -40,7 +42,10 @@ function Price({name, price, low_24h, high_24h, change_24h, btc, eth, currency}:
                     <span className='Price-bar-text'>Low:</span>
                     <span className='Price-bar-price'>{currency}{low_24h}</span>
                 </div>
-                <div className="Price-bar-line"></div>
+                <div className="Price-bar-line">
+                    <div className="Price-bar-line-progress"/>
+                    <div className="Price-bar-line-arrow"/>
+                </div>
                 <div className='Price-bar-high'>
                     <span className='Price-bar-text'>High:</span>
                     <span className='Price-bar-price'>{currency}{high_24h}</span>
@@ -51,7 +56,10 @@ function Price({name, price, low_24h, high_24h, change_24h, btc, eth, currency}:
 }
 
 const StyledPrice = styled.div<StyledPriceProps>`
-    max-width: ${props => props.theme.breakpoint.theta};
+    max-width: 300px;
+    @media screen and (min-width: ${props => props.theme.breakpoint.eta}) {
+        max-width: ${props => props.theme.breakpoint.eta};
+    }
     .Price {
         &-name {
             color: ${props => props.theme.color.delta};
@@ -95,11 +103,20 @@ const StyledPrice = styled.div<StyledPriceProps>`
             gap: ${props => props.theme.space.zeta};
             align-items: center;
             font-size: ${props => props.theme.font.size.delta};
+            
             &-line {
+                position: relative;
                 width: 200px;
-                height: 5px;
-                border-radius: ${props => props.theme.space.theta};
+                height: 6px;
+                border-radius: ${props => props.theme.space.epsilon};
                 background-color: ${props => props.theme.color.epsilon};
+                &-progress {
+                    display: block;
+                    height: 100%;
+                    width: ${props => (props.barPercentage * 100) + '%'};
+                    border-radius: ${props => props.theme.space.epsilon};
+                    background-image: linear-gradient(to left, #7F6F68, #D1C9C7);
+                }
             }
             &-text {
                 color: ${props => props.theme.color.delta};
@@ -107,11 +124,11 @@ const StyledPrice = styled.div<StyledPriceProps>`
             &-price {
                 color: ${props => props.theme.color.alpha};
             }
-            &-high {
-
-            }
-            &-low {
-                
+            &-high, &-low {
+                display: block;
+                span {
+                    display: inline;
+                }
             }
         }
     }

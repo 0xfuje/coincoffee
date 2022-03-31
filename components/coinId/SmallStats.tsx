@@ -59,7 +59,7 @@ const StyledSmallStats = styled.div`
                 color: ${props => props.theme.color.delta};
             }
             &-number {
-                font-size: ${props => props.theme.font.size.beta};
+                font-size: ${props => props.theme.font.size.gamma};
                 font-weight: ${props => props.theme.font.weight.alpha};
                 color: ${props => props.theme.color.beta};
             }

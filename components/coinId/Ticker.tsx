@@ -48,7 +48,7 @@ const StyledTicker = styled.div`
     height: 4em;
     align-items: center;
     position: relative;
-    max-width: ${props => props.theme.breakpoint.epsilon};
+    // max-width: ${props => props.theme.breakpoint.epsilon};
     &:hover {
         background-color: ${props => props.theme.color.zeta};
     }
