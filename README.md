@@ -2,6 +2,8 @@
 
 A minimalist cryptocurrency prices and market site.
 
+![alt text](https://github.com/0xfuje/coincoffee/blob/main/public/laptop.png)
+
 Your daily dose of crypto caffeine, served in a delicious coffee.
 
 ### Development server
