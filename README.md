@@ -7,7 +7,7 @@ A minimalist cryptocurrency prices and market site.
 Your daily dose of crypto caffeine, served in a delicious coffee.
 
 ### Development server
-Install dependencies tnan run dev server with:
+Install dependencies than run dev server with:
 ```bash
 npm i && npm run dev
 ```
